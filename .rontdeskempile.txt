@@ -1,0 +1,256 @@
+﻿const categories = [
+  {
+    title: "Firmy a podnikatelia",
+    description: "Detailné profily, kontakty, vlastníctvo a vývoj spoločností na Slovensku.",
+    accent: "#3b82f6",
+  },
+  {
+    title: "Verejný sektor",
+    description: "Úradné rozhodnutia, zmluvy, dotácie a financovanie pre obce a štát.",
+    accent: "#14b8a6",
+  },
+  {
+    title: "Korporátny trh",
+    description: "Správy o akciových spoločnostiach, partnerstvách a strategických investíciách.",
+    accent: "#8b5cf6",
+  },
+  {
+    title: "Ekonomika a dane",
+    description: "Kurzové sadzby, dane, legislatíva a prehľad vývoja trhu.",
+    accent: "#f59e0b",
+  },
+  {
+    title: "Obchodné bazáre",
+    description: "Miesto na porovnanie dodávateľov, partnerov, služieb a nových projektov.",
+    accent: "#ef4444",
+  },
+  {
+    title: "Inovácie a startupy",
+    description: "Najnovšie startupy, fondy, inovácie a nápady, ktoré menia slovenský trh.",
+    accent: "#22c55e",
+  },
+];
+
+const metrics = [
+  { value: "92 340+", label: "spoločností" },
+  { value: "14 800+", label: "osôb a konateľov" },
+  { value: "480+", label: "obcí a miest" },
+  { value: "24/7", label: "dostupnosť údajov" },
+];
+
+const highlights = [
+  "Komplexné profily firiem, vlastníkov a vzťahov medzi subjektmi.",
+  "Aktuality z ekonomiky, verejného sektora a podnikania v reálnom čase.",
+  "Jednoduché vyhľadávanie podľa názvu, IČO, odvetvia alebo lokality.",
+  "Nástroje pre investície, partnerstvá, verejné obstarávanie a analýzu trhu.",
+];
+
+const news = [
+  {
+    tag: "Ekonomika",
+    title: "Slovenské firmy rýchlo expandujú do strednej Európy",
+    text: "Analýza rastu exportu a nových investícií v priemyselných a technologických odvetviach.",
+  },
+  {
+    tag: "Verejný sektor",
+    title: "Nové schémy dotácií pre malé a stredné podniky",
+    text: "Ministerstvo pripravilo ďalšie podporné programy pre zelenú transformáciu a digitalizáciu.",
+  },
+  {
+    tag: "Korporáty",
+    title: "Najväčšie korporácie zvyšujú investície do AI a automatizácie",
+    text: "Zvýšenie produktivity a digitalizácie sa stáva najdôležitejším impulzom pre rast.",
+  },
+];
+
+export default function Home() {
+  return (
+    <main className="page-shell">
+      <header className="topbar">
+        <div className="brand-wrap">
+          <div className="brand-mark">Q4</div>
+          <div>
+            <div className="brand-name">Q4.sk</div>
+            <div className="brand-subtitle">Biznis a verejný sektor</div>
+          </div>
+        </div>
+
+        <nav className="nav" aria-label="Hlavná navigácia">
+          <a href="#firmy">Firmy</a>
+          <a href="#sektor">Sektor</a>
+          <a href="#trhy">Trhy</a>
+          <a href="#spravy">Správy</a>
+        </nav>
+
+        <div className="actions">
+          <button className="secondary-btn">Prihlásiť sa</button>
+          <button className="primary-btn">Zobraziť databázu</button>
+        </div>
+      </header>
+
+      <section className="hero">
+        <div className="hero-copy">
+          <span className="eyebrow">Portál pre podnikanie, štát a korporácie</span>
+          <h1>Všetko, čo potrebujete vedieť o podnikaní na Slovensku.</h1>
+          <p>
+            Vyhľadávajte firmy, vlastníkov, verejné obstarávania, investície a ekonomické
+            trendy v jednom mieste. Q4.sk vám pomôže rýchlo nájsť relevantné informácie pre
+            rozhodovanie, obchod a rast.
+          </p>
+
+          <div className="search-shell" aria-label="Vyhľadávanie">
+            <div className="search-field">
+              <span>Hľadám</span>
+              <input aria-label="Vyhľadávanie" placeholder="Názov firmy, IČO, odvetvie" />
+            </div>
+            <div className="search-field search-select">
+              <span>Kategória</span>
+              <select defaultValue="vsetko">
+                <option value="vsetko">Všetko</option>
+                <option value="firmy">Firmy</option>
+                <option value="verejny-sektor">Verejný sektor</option>
+                <option value="korporacie">Korporácie</option>
+                <option value="dotacie">Dotácie</option>
+              </select>
+            </div>
+            <button className="primary-btn search-btn">Vyhľadať</button>
+          </div>
+
+          <div className="hero-metrics">
+            {metrics.map((metric) => (
+              <div key={metric.label} className="metric-item">
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="hero-visual" aria-label="Prehľad portálu">
+          <div className="glass-card dashboard-card">
+            <div className="dashboard-header">
+              <span className="status-dot" />
+              <span>Aktívne trhy</span>
+            </div>
+
+            <div className="mini-chart">
+              <span style={{ height: "38%" }} />
+              <span style={{ height: "54%" }} />
+              <span style={{ height: "72%" }} />
+              <span style={{ height: "86%" }} />
+              <span style={{ height: "76%" }} />
+              <span style={{ height: "96%" }} />
+            </div>
+
+            <div className="company-list">
+              <div className="company-item">
+                <div>
+                  <strong>Slovenská Energetika</strong>
+                  <small>Energetika</small>
+                </div>
+                <span className="up">+8,4%</span>
+              </div>
+              <div className="company-item">
+                <div>
+                  <strong>NovaBuild s.r.o.</strong>
+                  <small>Stavba</small>
+                </div>
+                <span className="up">+6,2%</span>
+              </div>
+              <div className="company-item">
+                <div>
+                  <strong>DigitalVitaj</strong>
+                  <small>IT a SaaS</small>
+                </div>
+                <span className="up">+12,1%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="categories" id="firmy">
+        <div className="section-heading">
+          <span className="eyebrow">Rýchle hľadanie</span>
+          <h2>Prehľad najdôležitejších oblastí</h2>
+        </div>
+
+        <div className="category-grid">
+          {categories.map((category) => (
+            <article key={category.title} className="category-card">
+              <div className="category-icon" style={{ background: category.accent }} />
+              <h3>{category.title}</h3>
+              <p>{category.description}</p>
+              <span>Preskúmať</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="feature-layout" id="sektor">
+        <div className="feature-panel main-panel">
+          <span className="eyebrow">Prečo práve my</span>
+          <h2>Jednotný zdroj informácií pre podnikanie a rozhodovanie.</h2>
+          <ul className="check-list">
+            {highlights.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="feature-panel side-panel">
+          <div className="mini-stat">
+            <span>Aktuálne správy</span>
+            <strong>1 482</strong>
+            <small>nových záznamov za 7 dní</small>
+          </div>
+          <div className="mini-stat soft">
+            <span>Verejné obstarávania</span>
+            <strong>396</strong>
+            <small>priebežné tendery</small>
+          </div>
+          <div className="mini-stat soft">
+            <span>Investičné projekty</span>
+            <strong>241</strong>
+            <small>plánovaných projektov</small>
+          </div>
+        </div>
+      </section>
+
+      <section className="news" id="spravy">
+        <div className="section-heading small-gap">
+          <span className="eyebrow">Najnovšie</span>
+          <h2>Správy z trhu a podnikania</h2>
+        </div>
+
+        <div className="news-grid">
+          {news.map((item) => (
+            <article key={item.title} className="news-card">
+              <span className="tag">{item.tag}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <a href="#">Prečítať viac</a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer className="footer">
+        <div>
+          <div className="brand-wrap">
+            <div className="brand-mark">Q4</div>
+            <div>
+              <div className="brand-name">Q4.sk</div>
+            </div>
+          </div>
+        </div>
+        <div className="footer-links">
+          <a href="#">O portáli</a>
+          <a href="#">Kontakty</a>
+          <a href="#">Podmienky</a>
+          <a href="#">Cookies</a>
+        </div>
+      </footer>
+    </main>
+  );
+}
