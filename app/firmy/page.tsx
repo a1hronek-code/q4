@@ -1,47 +1,45 @@
 import Link from "next/link";
-import { companies } from "../lib/companies";
+import { SearchPanel } from "../components/SearchPanel";
 
 export default function CompanyDirectoryPage() {
   return (
     <main className="page-shell">
       <header className="topbar">
-        <div className="brand-wrap">
-          <div className="brand-mark">Q4</div>
-          <div>
-            <div className="brand-name">Q4.sk</div>
-            <div className="brand-subtitle">Katalóg spoločností</div>
-          </div>
-        </div>
+        <Link href="/" className="brand-wrap" aria-label="Q4.sk – domov">
+          <span className="brand-mark">Q4</span>
+          <span>
+            <span className="brand-name">Q4.sk</span>
+            <span className="brand-subtitle">Vyhľadávanie v štátnom registri</span>
+          </span>
+        </Link>
         <nav className="nav" aria-label="Navigácia">
           <Link href="/">Domov</Link>
-          <Link href="#">Firmy</Link>
-          <Link href="#">Databáza</Link>
+          <a href="#vyhladavanie">Vyhľadávanie</a>
+          <a href="https://rpo.statistics.sk/new/" target="_blank" rel="noreferrer">
+            Oficiálny register
+          </a>
         </nav>
       </header>
 
       <section className="tool-section">
         <div className="section-heading">
-          <span className="eyebrow">Databáza subjektov</span>
-          <h2>Všetky firmy a subjekty v portáli</h2>
+          <span className="eyebrow">Register právnických osôb MV SR</span>
+          <h1>Vyhľadajte firmu alebo iný subjekt</h1>
+          <p className="directory-intro">
+            Výsledky sa načítajú priamo z verejného REST API slovenského registra RPO.
+            Vyhľadávať môžete podľa názvu alebo IČO.
+          </p>
         </div>
 
-        <div className="company-grid">
-          {companies.map((company) => (
-            <Link key={company.slug} href={`/firmy/${company.slug}`} className="company-card">
-              <div className="company-card-top">
-                <span className="company-badge">{company.industry}</span>
-                <span className="company-city">{company.city}</span>
-              </div>
-              <h3>{company.name}</h3>
-              <p>{company.shortDescription}</p>
-              <div className="company-meta">
-                <span>{company.legalForm}</span>
-                <span>IČO {company.ico}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <SearchPanel />
       </section>
+
+      <p className="data-source-note">
+        Zdroj a dokumentácia API:{" "}
+        <a href="https://rpo.minv.sk/rpo-api-doc.html" target="_blank" rel="noreferrer">
+          Ministerstvo vnútra SR – RPO API
+        </a>
+      </p>
     </main>
   );
 }

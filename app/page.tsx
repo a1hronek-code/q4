@@ -1,22 +1,54 @@
 ﻿import Link from "next/link";
 import { BusinessTools } from "./components/BusinessTools";
 import { SearchPanel } from "./components/SearchPanel";
-import { companies } from "./lib/companies";
 
 const officeCards = [
-  { name: "Úrad práce, sociálnych vecí a rodiny", city: "Bratislava", detail: "Registrácia, dávky, podporené zamestnanie." },
-  { name: "Daňový úrad SR", city: "Bratislava", detail: "Daňové priznania, zrážky a preddavky." },
-  { name: "Obecné úrady", city: "Národné", detail: "Podnikateľské preukazy a licencie." },
-  { name: "Centrálne orgány štátu", city: "Národné", detail: "Legislatíva, výnosy a zriadenie podnikania." },
+  {
+    name: "Ústredie práce, sociálnych vecí a rodiny",
+    city: "Zamestnanosť a dávky",
+    detail: "Oficiálne informácie o službách zamestnanosti a sociálnej podpore.",
+    href: "https://www.upsvr.gov.sk/",
+  },
+  {
+    name: "Finančná správa SR",
+    city: "Dane",
+    detail: "Daňové informácie, elektronické služby a formuláre.",
+    href: "https://www.financnasprava.sk/",
+  },
+  {
+    name: "Portál slovensko.sk",
+    city: "Elektronické služby",
+    detail: "Elektronická komunikácia so štátom a životné situácie.",
+    href: "https://www.slovensko.sk/",
+  },
+  {
+    name: "Ministerstvo vnútra SR",
+    city: "Štátna správa",
+    detail: "Informácie a elektronické služby Ministerstva vnútra SR.",
+    href: "https://www.minv.sk/",
+  },
 ];
 
 const apiCards = [
-  { title: "Register ekonomických subjektov", status: "Pripravené na API", note: "Získavanie IČO, právnej formy, sídla a vlastníkov." },
-  { title: "Verejné obstarávanie", status: "Integrácia", note: "Tendery, výzvy, výsledky a partnerstvá." },
-  { title: "Data z úradov", status: "Čiastočne k dispozícii", note: "Dávky, práce, dotácie a štátne záznamy." },
+  {
+    title: "Register právnických osôb",
+    status: "Živé REST API",
+    note: "Vyhľadávanie podľa názvu alebo IČO a detail záznamu subjektu.",
+    href: "https://rpo.minv.sk/rpo-api-doc.html",
+  },
+  {
+    title: "Otvorené dáta RPO",
+    status: "Hromadný export",
+    note: "Oficiálny export registra a informácie o denných aktualizáciách.",
+    href: "https://rpo.minv.sk/rpo-api-doc.html",
+  },
+  {
+    title: "Národný katalóg otvorených dát",
+    status: "Oficiálny katalóg",
+    note: "Vyhľadávanie otvorených dát z verejnej správy Slovenskej republiky.",
+    href: "https://data.slovensko.sk/",
+  },
 ];
-
-const featuredCompanies = companies.slice(0, 3);
 
 export default function Home() {
   return (
@@ -31,15 +63,17 @@ export default function Home() {
         </div>
 
         <nav className="nav" aria-label="Hlavná navigácia">
-          <a href="#firmy">Firmy</a>
+          <a href="#vyhladavanie">Firmy</a>
           <a href="#kalkulacky">Kalkulačky</a>
           <a href="#urady">Úrady</a>
-          <a href="#spravy">Správy</a>
+          <a href="#zdrojove-data">Dáta</a>
         </nav>
 
         <div className="actions">
-          <button className="secondary-btn">Prihlásiť sa</button>
-          <button className="primary-btn">Zobraziť databázu</button>
+          <a className="secondary-btn" href="https://rpo.statistics.sk/new/" target="_blank" rel="noreferrer">
+            RPO portál
+          </a>
+          <Link className="primary-btn" href="/firmy">Vyhľadať subjekt</Link>
         </div>
       </header>
 
@@ -48,70 +82,60 @@ export default function Home() {
           <span className="eyebrow">Portál pre podnikanie, štát a korporácie</span>
           <h1>Všetko, čo potrebujete vedieť o podnikaní na Slovensku.</h1>
           <p>
-            Vyhľadávajte firmy, vlastníkov, verejné obstarávania, dátové zdroje, dávky a daňové
-            výpočty na jednom mieste. Q4.sk je pripravený na rozhodovanie, obchod, investície a
-            správne riadenie podnikania.
+            Vyhľadávajte právnické osoby a podnikateľov priamo v registri RPO Ministerstva
+            vnútra SR. Výsledky aj profily čerpajú údaje z oficiálneho verejného API.
           </p>
 
           <SearchPanel />
 
           <div className="hero-metrics">
             <div className="metric-item">
-              <strong>92 340+</strong>
-              <span>spoločností</span>
+              <strong>REST API</strong>
+              <span>zdroj údajov</span>
             </div>
             <div className="metric-item">
-              <strong>14 800+</strong>
-              <span>osôb a konateľov</span>
+              <strong>Názov</strong>
+              <span>vyhľadávanie</span>
             </div>
             <div className="metric-item">
-              <strong>480+</strong>
-              <span>obcí a miest</span>
+              <strong>IČO</strong>
+              <span>presné hľadanie</span>
             </div>
             <div className="metric-item">
-              <strong>24/7</strong>
-              <span>dostupnosť údajov</span>
+              <strong>CC BY 4.0</strong>
+              <span>licencia zdroja</span>
             </div>
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Prehľad portálu">
+        <div className="hero-visual" aria-label="Informácie o štátnom registri">
           <div className="glass-card dashboard-card">
             <div className="dashboard-header">
               <span className="status-dot" />
-              <span>Aktívne trhy</span>
-            </div>
-
-            <div className="mini-chart">
-              <span style={{ height: "38%" }} />
-              <span style={{ height: "54%" }} />
-              <span style={{ height: "72%" }} />
-              <span style={{ height: "86%" }} />
-              <span style={{ height: "76%" }} />
-              <span style={{ height: "96%" }} />
+              <span>Register RPO · Ministerstvo vnútra SR</span>
             </div>
 
             <div className="company-list">
               <div className="company-item">
                 <div>
-                  <strong>Slovenská Energetika</strong>
-                  <small>Energetika</small>
+                  <strong>Vyhľadávanie podľa názvu</strong>
+                  <small>Oficiálne údaje o subjektoch</small>
                 </div>
-                <span className="up">+8,4%</span>
+                <span className="up">RPO</span>
               </div>
               <div className="company-item">
                 <div>
-                  <strong>NovaBuild s.r.o.</strong>
-                  <small>Stavba</small>
+                  <strong>Vyhľadávanie podľa IČO</strong>
+                  <small>Presné vyhľadanie záznamu</small>
                 </div>
-                <span className="up">+6,2%</span>
+                <span className="up">IČO</span>
               </div>
               <div className="company-item">
                 <div>
-                  <strong>DigitalVitaj</strong>
-                  <small>IT a SaaS</small>
+                  <strong>Údaje aktualizované denne</strong>
+                  <small>Podľa dokumentácie registra</small>
                 </div>
-                <span className="up">+12,1%</span>
+                <span className="up">24 h</span>
               </div>
             </div>
           </div>
@@ -128,38 +152,38 @@ export default function Home() {
           <article className="category-card">
             <div className="category-icon" style={{ background: "#3b82f6" }} />
             <h3>Firmy a podnikatelia</h3>
-            <p>Detailné profily, kontakty, vlastníctvo a vývoj spoločností na Slovensku.</p>
-            <span>Preskúmať</span>
+            <p>Vyhľadávanie právnických osôb a podnikateľov podľa názvu alebo IČO.</p>
+            <a className="category-link" href="#vyhladavanie">Vyhľadať v registri</a>
           </article>
           <article className="category-card">
             <div className="category-icon" style={{ background: "#14b8a6" }} />
             <h3>Verejný sektor</h3>
-            <p>Úradné rozhodnutia, zmluvy, dotácie a financovanie pre obce a štát.</p>
-            <span>Preskúmať</span>
+            <p>Oficiálne portály a elektronické služby verejnej správy.</p>
+            <a className="category-link" href="#urady">Zobraziť úrady</a>
           </article>
           <article className="category-card">
             <div className="category-icon" style={{ background: "#8b5cf6" }} />
             <h3>Korporátny trh</h3>
-            <p>Správy o akciových spoločnostiach, partnerstvách a investíciách.</p>
-            <span>Preskúmať</span>
+            <p>Oficiálne registračné údaje o spoločnostiach a ich právnej forme.</p>
+            <a className="category-link" href="#vyhladavanie">Vyhľadať spoločnosť</a>
           </article>
           <article className="category-card">
             <div className="category-icon" style={{ background: "#f59e0b" }} />
             <h3>Ekonomika a dane</h3>
-            <p>Kurzové sadzby, dane, legislatíva a prehľad vývoja trhu.</p>
-            <span>Preskúmať</span>
+            <p>Orientačné kalkulačky a odkazy na oficiálne daňové informácie.</p>
+            <a className="category-link" href="#kalkulacky">Otvoriť nástroje</a>
           </article>
           <article className="category-card">
             <div className="category-icon" style={{ background: "#ef4444" }} />
             <h3>Obchodné bazáre</h3>
-            <p>Porovnanie dodávateľov, partnerov, služieb a nových projektov.</p>
-            <span>Preskúmať</span>
+            <p>Overte si slovenský subjekt pred obchodným rokovaním.</p>
+            <a className="category-link" href="#vyhladavanie">Overiť subjekt</a>
           </article>
           <article className="category-card">
             <div className="category-icon" style={{ background: "#22c55e" }} />
             <h3>Inovácie a startupy</h3>
-            <p>Najnovšie startupy, fondy, inovácie a nápady meniacich slovenský trh.</p>
-            <span>Preskúmať</span>
+            <p>Vyhľadávajte aj nové spoločnosti a podnikateľské subjekty v RPO.</p>
+            <a className="category-link" href="#vyhladavanie">Hľadať subjekt</a>
           </article>
         </div>
       </section>
@@ -184,112 +208,113 @@ export default function Home() {
               <span className="office-badge">{office.city}</span>
               <h3>{office.name}</h3>
               <p>{office.detail}</p>
-              <a href="#">Prejsť na službu</a>
+              <a href={office.href} target="_blank" rel="noreferrer">Otvoriť oficiálny web</a>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="feature-layout" id="trhy">
+      <section className="feature-layout" id="o-portali">
         <div className="feature-panel main-panel">
-          <span className="eyebrow">Prečo práve my</span>
-          <h2>Jednotný zdroj informácií pre podnikanie, štát, korporácie a ľudí.</h2>
+          <span className="eyebrow">Overiteľný zdroj</span>
+          <h2>Údaje z registra bez vymyslených firemných profilov.</h2>
           <ul className="check-list">
-            <li>Komplexné profily firiem, vlastníkov a vzťahov medzi subjektmi.</li>
-            <li>Aktuality z ekonomiky, verejného sektora a podnikania v reálnom čase.</li>
-            <li>Jednoduché vyhľadávanie podľa názvu, IČO, odvetvia alebo lokality.</li>
-            <li>Nástroje pre investície, partnerstvá, verejné obstarávanie a analýzu trhu.</li>
+            <li>Výsledky načítavame z verejného REST API Registra právnických osôb.</li>
+            <li>Vyhľadávať môžete podľa názvu alebo IČO a filtrovať aktívne záznamy.</li>
+            <li>Detail subjektu sa načíta priamo z rovnakého štátneho zdroja.</li>
+            <li>Zdrojové údaje sú denne aktualizované a zverejnené pod licenciou CC BY 4.0.</li>
           </ul>
         </div>
 
         <div className="feature-panel side-panel">
           <div className="mini-stat">
-            <span>Aktuálne správy</span>
-            <strong>1 482</strong>
-            <small>nových záznamov za 7 dní</small>
+            <span>Zdroj</span>
+            <strong>RPO</strong>
+            <small>Register právnických osôb MV SR</small>
           </div>
           <div className="mini-stat soft">
-            <span>Verejné obstarávania</span>
-            <strong>396</strong>
-            <small>priebežné tendery</small>
+            <span>Aktualizácia</span>
+            <strong>Denne</strong>
+            <small>podľa dokumentácie API</small>
           </div>
           <div className="mini-stat soft">
-            <span>Investičné projekty</span>
-            <strong>241</strong>
-            <small>plánovaných projektov</small>
+            <span>Licencia</span>
+            <strong>CC BY 4.0</strong>
+            <small>uvedená správcom registra</small>
           </div>
         </div>
       </section>
 
       <section className="company-section">
         <div className="section-heading">
-          <span className="eyebrow">Databáza firiem</span>
-          <h2>Firmy a spoločnosti s individuálnym profilom</h2>
+          <span className="eyebrow">Vyhľadávanie subjektov</span>
+          <h2>Každý výsledok vedie na živý záznam v registri</h2>
         </div>
 
-        <div className="company-grid">
-          {featuredCompanies.map((company) => (
-            <Link key={company.slug} href={`/firmy/${company.slug}`} className="company-card">
-              <div className="company-card-top">
-                <span className="company-badge">{company.industry}</span>
-                <span className="company-city">{company.city}</span>
-              </div>
-              <h3>{company.name}</h3>
-              <p>{company.shortDescription}</p>
-              <div className="company-meta">
-                <span>{company.legalForm}</span>
-                <span>IČO {company.ico}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-
+        <p className="directory-intro">
+          Q4.sk už nezobrazuje ukážkové profily ako skutočné spoločnosti. Zadajte názov alebo IČO
+          a otvorte detail načítaný priamo z verejného registra Ministerstva vnútra SR.
+        </p>
         <div className="more-button-row">
-          <Link href="/firmy" className="primary-btn inline-link">Zobraziť všetky firmy</Link>
+          <Link href="#vyhladavanie" className="primary-btn inline-link">
+            Vyhľadať v registri RPO
+          </Link>
+          <a
+            href="https://rpo.statistics.sk/new/"
+            target="_blank"
+            rel="noreferrer"
+            className="secondary-btn"
+          >
+            Otvoriť oficiálny portál
+          </a>
         </div>
       </section>
 
-      <section className="api-section">
+      <section className="api-section" id="zdrojove-data">
         <div className="section-heading">
           <span className="eyebrow">API a dátové zdroje</span>
-          <h2>Pripravené na napojenie na oficiálne úradné a obchodné API</h2>
+          <h2>Oficiálne zdroje použitých údajov</h2>
         </div>
 
         <div className="api-grid">
           {apiCards.map((item) => (
-            <article key={item.title} className="api-card">
+            <a
+              key={item.title}
+              className="api-card"
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+            >
               <span className="status-pill">{item.status}</span>
               <h3>{item.title}</h3>
               <p>{item.note}</p>
-            </article>
+              <span className="source-link">Otvoriť zdroj →</span>
+            </a>
           ))}
         </div>
       </section>
 
       <section className="news" id="spravy">
         <div className="section-heading small-gap">
-          <span className="eyebrow">Najnovšie</span>
-          <h2>Správy z trhu a podnikania</h2>
+          <span className="eyebrow">Dôležité informácie</span>
+          <h2>Ako čítať údaje z registra</h2>
         </div>
 
         <div className="news-grid">
           <article className="news-card">
-            <span className="tag">Ekonomika</span>
-            <h3>Slovenské firmy rýchlo expandujú do strednej Európy</h3>
-            <p>Analýza rastu exportu a nových investícií v priemyselných a technologických odvetviach.</p>
-            <a href="#">Prečítať viac</a>
+            <span className="tag">Aktualizácia</span>
+            <h3>Údaje sa obnovujú denne</h3>
+            <p>Zmeny z posledných 24 hodín nemusia byť v API ešte zaznamenané.</p>
           </article>
           <article className="news-card">
-            <span className="tag">Verejný sektor</span>
-            <h3>Nové schémy dotácií pre malé a stredné podniky</h3>
-            <p>Ministerstvo pripravilo ďalšie podporné programy pre zelenú transformáciu a digitalizáciu.</p>
-            <a href="#">Prečítať viac</a>
+            <span className="tag">Rozsah údajov</span>
+            <h3>Nie všetky osobné údaje sú verejné</h3>
+            <p>Informácie o konečných užívateľoch výhod sa zobrazujú len pri preukázanom oprávnenom záujme.</p>
           </article>
           <article className="news-card">
-            <span className="tag">Korporáty</span>
-            <h3>Najväčšie korporácie zvyšujú investície do AI a automatizácie</h3>
-            <p>Zvýšenie produktivity a digitalizácie sa stáva najdôležitejším impulzom pre rast.</p>
-            <a href="#">Prečítať viac</a>
+            <span className="tag">Licencia</span>
+            <h3>Údaje RPO sú pod CC BY 4.0</h3>
+            <p>Pri ďalšom použití údajov uveďte Register právnických osôb MV SR ako zdroj.</p>
           </article>
         </div>
       </section>
@@ -304,10 +329,14 @@ export default function Home() {
           </div>
         </div>
         <div className="footer-links">
-          <a href="#">O portáli</a>
-          <a href="#">Kontakty</a>
-          <a href="#">Podmienky</a>
-          <a href="#">Cookies</a>
+          <a href="#o-portali">O portáli</a>
+          <Link href="/firmy">Vyhľadávanie</Link>
+          <a href="https://rpo.minv.sk/rpo-api-doc.html" target="_blank" rel="noreferrer">
+            Dokumentácia API
+          </a>
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+            Licencia CC BY 4.0
+          </a>
         </div>
       </footer>
     </main>

@@ -1,18 +1,6 @@
-import { NextResponse } from "next/server";
-import { companies } from "../../lib/companies";
+import type { NextRequest } from "next/server";
+import { GET as searchRpo } from "../search/route";
 
-export async function GET() {
-  return NextResponse.json({
-    results: companies.map((company) => ({
-      slug: company.slug,
-      name: company.name,
-      city: company.city,
-      industry: company.industry,
-      legalForm: company.legalForm,
-      ico: company.ico,
-      category: company.category,
-      shortDescription: company.shortDescription,
-    })),
-    total: companies.length,
-  });
+export async function GET(request: NextRequest) {
+  return searchRpo(request);
 }

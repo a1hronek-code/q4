@@ -1,29 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { companies } from "../../lib/companies";
-
-export function generateStaticParams() {
-  return companies.map((company) => ({ slug: company.slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const company = companies.find((item) => item.slug === slug);
-
-  if (!company) {
-    return { title: "Firma nebola nájdená" };
-  }
-
-  return {
-    title: `${company.name} | Q4.sk`,
-    description: company.shortDescription,
-  };
-}
+import { getRpoSubject, RpoApiError } from "../../lib/rpo";
 
 export default async function CompanyProfilePage({
   params,
@@ -31,86 +8,110 @@ export default async function CompanyProfilePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const company = companies.find((item) => item.slug === slug);
+  if (!/^\d+$/.test(slug)) notFound();
 
-  if (!company) {
-    notFound();
+  const id = Number(slug);
+  if (!Number.isSafeInteger(id) || id <= 0) notFound();
+
+  let subject;
+  let error = "";
+  try {
+    subject = await getRpoSubject(id);
+  } catch (cause) {
+    error =
+      cause instanceof RpoApiError
+        ? cause.message
+        : "Nepodarilo sa načítať údaje zo slovenského registra RPO.";
+    console.error("RPO entity lookup failed", cause);
   }
+
+  if (!subject && !error) notFound();
 
   return (
     <main className="page-shell">
       <header className="topbar">
-        <div className="brand-wrap">
-          <div className="brand-mark">Q4</div>
-          <div>
-            <div className="brand-name">Q4.sk</div>
-            <div className="brand-subtitle">Profil subjektu</div>
-          </div>
-        </div>
+        <Link href="/" className="brand-wrap" aria-label="Q4.sk – domov">
+          <span className="brand-mark">Q4</span>
+          <span>
+            <span className="brand-name">Q4.sk</span>
+            <span className="brand-subtitle">Údaje z registra RPO</span>
+          </span>
+        </Link>
         <nav className="nav" aria-label="Navigácia">
           <Link href="/">Domov</Link>
-          <Link href="/firmy">Firmy</Link>
-          <Link href="#">Kontakty</Link>
+          <Link href="/firmy">Vyhľadávanie</Link>
+          <a href="https://rpo.statistics.sk/new/" target="_blank" rel="noreferrer">
+            Oficiálny register
+          </a>
         </nav>
       </header>
 
-      <section className="feature-layout">
-        <div className="feature-panel main-panel">
-          <span className="eyebrow">{company.industry}</span>
-          <h2>{company.name}</h2>
-          <p className="company-profile-description">{company.description}</p>
-
-          <div className="profile-meta-grid">
-            <div className="mini-stat soft">
-              <span>Právna forma</span>
-              <strong>{company.legalForm}</strong>
-            </div>
-            <div className="mini-stat soft">
-              <span>Sídlo</span>
-              <strong>{company.city}</strong>
-            </div>
-            <div className="mini-stat soft">
-              <span>IČO</span>
-              <strong>{company.ico}</strong>
-            </div>
+      <section className="profile-section">
+        {error ? (
+          <div className="profile-error" role="alert">
+            <span className="eyebrow">Register RPO</span>
+            <h1>Údaje sa momentálne nedajú načítať</h1>
+            <p>{error}</p>
+            <Link href="/firmy" className="primary-btn inline-link">
+              Späť na vyhľadávanie
+            </Link>
+            <a
+              className="secondary-btn inline-link"
+              href={`https://rpo.statistics.sk/new/organization/${id}/withHistory`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Zobraziť záznam na portáli RPO
+            </a>
           </div>
-        </div>
-
-        <div className="feature-panel side-panel">
-          <div className="mini-stat">
-            <span>Vlastníci</span>
-            <strong>{company.owners.length}</strong>
-            <small>{company.owners.join(", ")}</small>
-          </div>
-          <div className="mini-stat soft">
-            <span>API zdroj</span>
-            <strong>Pripravené</strong>
-            <small>{company.apiEndpoint}</small>
-          </div>
-        </div>
-      </section>
-
-      <section className="tool-section">
-        <div className="section-heading">
-          <span className="eyebrow">Vztahy medzi subjektmi</span>
-          <h2>Graf a prepojenie spoločnosti s okolím</h2>
-        </div>
-
-        <div className="relationship-box">
-          <h3>{company.name}</h3>
-          <div className="graph-grid">
-            <div className="node">
-              <strong>{company.name}</strong>
-              <small>{company.legalForm}</small>
+        ) : subject ? (
+          <>
+            <div className="section-heading">
+              <span className="eyebrow">{subject.legalForm || "Záznam v registri RPO"}</span>
+              <h1>{subject.name}</h1>
+              {subject.termination ? (
+                <p className="inactive-notice">Tento subjekt má v registri uvedený dátum zániku.</p>
+              ) : null}
             </div>
-            {company.related.map((related) => (
-              <div key={related} className="node">
-                <strong>{related}</strong>
-                <small>Subjekt</small>
+
+            <div className="profile-meta-grid">
+              <div className="mini-stat soft">
+                <span>IČO</span>
+                <strong>{subject.ico || "V registri neuvedené"}</strong>
               </div>
-            ))}
-          </div>
-        </div>
+              <div className="mini-stat soft">
+                <span>Sídlo</span>
+                <strong>{subject.city || "V registri neuvedené"}</strong>
+              </div>
+              <div className="mini-stat soft">
+                <span>Právna forma</span>
+                <strong>{subject.legalForm || "V registri neuvedená"}</strong>
+              </div>
+              <div className="mini-stat soft">
+                <span>Dátum vzniku</span>
+                <strong>{subject.establishment || "V registri neuvedený"}</strong>
+              </div>
+            </div>
+
+            {subject.activity ? (
+              <section className="profile-activity">
+                <span className="eyebrow">Ekonomická činnosť</span>
+                <p>{subject.activity}</p>
+              </section>
+            ) : null}
+
+            <p className="data-source-note">
+              Zdroj: Register právnických osôb MV SR, denne aktualizované údaje ·{" "}
+              <a
+                href="https://rpo.minv.sk/rpo-api-doc.html"
+                target="_blank"
+                rel="noreferrer"
+              >
+                dokumentácia a licencia CC BY 4.0
+              </a>
+            </p>
+          </>
+        ) : null}
       </section>
     </main>
   );
