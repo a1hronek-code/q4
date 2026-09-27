@@ -23,6 +23,10 @@ otvorí ju pre vyhľadávanie. Počiatočný snapshot má približne 900 MB komp
 preto môže sťahovanie a indexovanie chvíľu trvať. Priebeh a prípadné chyby sa
 zobrazujú v termináli. Databáza ani stiahnuté súbory sa neukladajú do Gitu.
 
+Profil subjektu obsahuje graf štatutárnych osôb a ďalších firiem prepojených
+cez rovnakú osobu. Keďže export RPO nemá jednoznačný identifikátor osoby,
+medzifiremné väzby sa spájajú podľa presného mena a môžu obsahovať menovcov.
+
 Aplikácia je po spustení dostupná na
 [http://localhost:3000](http://localhost:3000).
 
@@ -56,5 +60,7 @@ Export môže byť až o 24 hodín pozadu oproti aktuálnemu stavu registra.
 Databáza je zámerne ignorovaná v Gite: ide o veľký súbor, ktorý sa pravidelne
 obnovuje. Produkčné nasadenie preto potrebuje Node.js runtime (nie čisto
 statický hosting) a trvalé úložisko alebo spravovanú SQLite/PostgreSQL databázu.
-Na prvom nasadení treba import spustiť v prostredí, ktoré aplikácii
-sprístupňuje databázu v `data/rpo.sqlite`.
+Súbory v `data/` sa nezahŕňajú do Next.js output tracingu, preto treba databázu
+sprístupniť aplikácii v `data/rpo.sqlite` nezávisle od build procesu.
+Príkaz `npm run build` používa Webpack, aby zostavenie nebolo závislé od veľkosti
+lokálneho databázového súboru.

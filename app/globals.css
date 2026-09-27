@@ -904,6 +904,183 @@ a.api-card:hover {
   line-height: 1.65;
 }
 
+.relationship-section {
+  overflow: hidden;
+}
+
+.relationship-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.relationship-heading h2,
+.relationship-section > h2 {
+  margin: 12px 0 0;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  letter-spacing: -0.045em;
+}
+
+.relationship-heading p,
+.relationship-section > p {
+  max-width: 680px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.relationship-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 14px;
+  padding-bottom: 4px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.relationship-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.relationship-legend i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-company {
+  background: #3b82f6;
+}
+
+.legend-person {
+  background: #8b5cf6;
+}
+
+.legend-current {
+  background: #0f9f78;
+}
+
+.legend-historical {
+  background: #94a3b8;
+}
+
+.relationship-canvas {
+  margin: 22px -8px 0;
+  overflow-x: auto;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(139, 92, 246, 0.055), transparent 48%),
+    linear-gradient(180deg, #fbfdff, #f8fafc);
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.relationship-canvas svg {
+  display: block;
+  width: 100%;
+  min-width: 900px;
+  height: auto;
+}
+
+.relationship-edge {
+  fill: none;
+  stroke: url("#relationship-line");
+  stroke-width: 2.25;
+  opacity: 0.76;
+}
+
+.relationship-edge.is-historical {
+  stroke: #aab4c2;
+  stroke-dasharray: 6 6;
+  opacity: 0.7;
+}
+
+.relationship-node rect {
+  stroke-width: 1.25;
+  filter: drop-shadow(0 5px 10px rgba(15, 23, 42, 0.06));
+}
+
+.company-node rect {
+  fill: #eff6ff;
+  stroke: #bfdbfe;
+}
+
+.person-node rect {
+  fill: #f5f3ff;
+  stroke: #ddd6fe;
+}
+
+.person-node.is-historical rect {
+  fill: #f8fafc;
+  stroke: #cbd5e1;
+}
+
+.relationship-node-title,
+.relationship-node-detail {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  pointer-events: none;
+}
+
+.relationship-node-title {
+  fill: #172554;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.relationship-node-detail {
+  fill: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.relationship-status-dot {
+  fill: #0f9f78;
+}
+
+.person-node.is-historical .relationship-status-dot {
+  fill: #94a3b8;
+}
+
+.relationship-node-link {
+  cursor: pointer;
+}
+
+.relationship-node-link:hover rect,
+.relationship-node-link:focus-visible rect {
+  stroke: #2563eb;
+  stroke-width: 2.25;
+}
+
+.relationship-notes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.relationship-notes > span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  font-weight: 700;
+}
+
+.relationship-notes p {
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+
 .profile-error h1 {
   margin: 14px 0 0;
   font-size: clamp(1.8rem, 3vw, 2.6rem);

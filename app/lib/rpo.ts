@@ -31,6 +31,33 @@ type SubjectRow = {
   payload_json: string;
 };
 
+export type RpoRelationshipPerson = {
+  id: string;
+  name: string;
+  roles: string[];
+  active: boolean;
+};
+
+export type RpoRelationshipCompany = {
+  id: number;
+  name: string;
+  ico: string;
+  city: string;
+};
+
+export type RpoRelationship = {
+  personId: string;
+  companyId: number;
+  role: string;
+  active: boolean;
+};
+
+export type RpoCompanyGraph = {
+  people: RpoRelationshipPerson[];
+  companies: RpoRelationshipCompany[];
+  relationships: RpoRelationship[];
+};
+
 export class RpoDatabaseError extends Error {
   readonly statusCode: number;
 
@@ -164,6 +191,159 @@ function toSubject(row: SubjectRow, payload: unknown): RpoSubject {
     activities,
     statutoryBodies,
   };
+}
+
+type PersonRelation = {
+  name: string;
+  role: string;
+  active: boolean;
+};
+
+function normalizedName(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLocaleLowerCase("sk");
+}
+
+function getPersonName(details: Record<string, unknown>): string {
+  const person = asRecord(details.personName);
+  if (!person) return "";
+  return (
+    firstText(person.formatedName) ||
+    [firstText(person.givenNames), firstText(person.familyNames)].filter(Boolean).join(" ")
+  );
+}
+
+function getPersonRelations(record: Record<string, unknown>): PersonRelation[] {
+  return [...asArray(record.statutoryBodies), ...asArray(record.stakeholders)]
+    .map((value) => {
+      const details = asRecord(value);
+      if (!details) return null;
+      const name = getPersonName(details).trim().replace(/\s+/g, " ");
+      if (!name) return null;
+      return {
+        name,
+        role: firstText(details.stakeholderType),
+        active: !firstText(details.validTo),
+      };
+    })
+    .filter((relation): relation is PersonRelation => relation !== null);
+}
+
+export function getRpoCompanyGraph(id: number): RpoCompanyGraph {
+  const database = getDatabase();
+  try {
+    const root = database
+      .prepare("SELECT id, name, ico, city, legal_form, establishment, termination, payload_json FROM subjects WHERE id = ?")
+      .get(id) as SubjectRow | undefined;
+    if (!root) return { people: [], companies: [], relationships: [] };
+
+    const rootPayload = asRecord(JSON.parse(root.payload_json) as unknown) ?? {};
+    const rootRelations = getPersonRelations(rootPayload);
+    const peopleById = new Map<string, RpoRelationshipPerson>();
+    const relationshipsByKey = new Map<string, RpoRelationship>();
+
+    for (const relation of rootRelations) {
+      const personId = normalizedName(relation.name);
+      const person = peopleById.get(personId) ?? {
+        id: personId,
+        name: relation.name,
+        roles: [],
+        active: false,
+      };
+      if (relation.role && !person.roles.includes(relation.role)) person.roles.push(relation.role);
+      person.active ||= relation.active;
+      peopleById.set(personId, person);
+      const key = `${personId}:${id}`;
+      const existing = relationshipsByKey.get(key);
+      if (existing) {
+        existing.active ||= relation.active;
+        if (relation.role && !existing.role.split(" · ").includes(relation.role)) {
+          existing.role = [existing.role, relation.role].filter(Boolean).join(" · ");
+        }
+      } else {
+        relationshipsByKey.set(key, {
+          personId,
+          companyId: id,
+          role: relation.role,
+          active: relation.active,
+        });
+      }
+    }
+
+    const people = [...peopleById.values()]
+      .sort((left, right) => Number(right.active) - Number(left.active) || left.name.localeCompare(right.name, "sk"))
+      .slice(0, 12);
+    const selectedPeople = new Set(people.map((person) => person.id));
+    const companiesById = new Map<number, RpoRelationshipCompany>();
+    const matchPeople = database.prepare(`
+      SELECT s.id, s.name, s.ico, s.city, s.legal_form, s.establishment, s.termination, s.payload_json
+      FROM subjects_fts
+      JOIN subjects s ON s.id = subjects_fts.rowid
+      WHERE subjects_fts MATCH ? AND s.id != ?
+      ORDER BY bm25(subjects_fts)
+      LIMIT 80
+    `);
+
+    for (const person of people) {
+      const query = makeFtsQuery(person.name);
+      const candidates = matchPeople.all(query, id) as SubjectRow[];
+      const matchingRelations = candidates
+        .flatMap((company) => {
+          const payload = asRecord(JSON.parse(company.payload_json) as unknown) ?? {};
+          return getPersonRelations(payload)
+            .filter((relation) => normalizedName(relation.name) === person.id)
+            .map((relation) => ({ company, relation }));
+        })
+        .sort(
+          (left, right) =>
+            Number(right.relation.active) - Number(left.relation.active) ||
+            right.relation.role.localeCompare(left.relation.role, "sk"),
+        );
+
+      for (const { company, relation } of matchingRelations) {
+        if (companiesById.size >= 12 && !companiesById.has(company.id)) continue;
+        companiesById.set(company.id, {
+          id: company.id,
+          name: company.name,
+          ico: company.ico,
+          city: company.city,
+        });
+        const key = `${person.id}:${company.id}`;
+        const existing = relationshipsByKey.get(key);
+        if (existing) {
+          existing.active ||= relation.active;
+          if (relation.role && !existing.role.split(" · ").includes(relation.role)) {
+            existing.role = [existing.role, relation.role].filter(Boolean).join(" · ");
+          }
+        } else {
+          relationshipsByKey.set(key, {
+            personId: person.id,
+            companyId: company.id,
+            role: relation.role,
+            active: relation.active,
+          });
+        }
+        if (companiesById.size >= 12) break;
+      }
+    }
+
+    return {
+      people,
+      companies: [...companiesById.values()].sort((left, right) => left.name.localeCompare(right.name, "sk")),
+      relationships: [...relationshipsByKey.values()].filter((relationship) =>
+        selectedPeople.has(relationship.personId),
+      ),
+    };
+  } catch (error) {
+    if (error instanceof RpoDatabaseError) throw error;
+    throw new RpoDatabaseError("Väzby subjektu sa nepodarilo načítať z registra RPO.");
+  } finally {
+    database.close();
+  }
 }
 
 export function searchRpo(

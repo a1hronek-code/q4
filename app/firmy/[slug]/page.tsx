@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getRpoSubject, RpoDatabaseError } from "../../lib/rpo";
+import { RelationshipGraph } from "../../components/RelationshipGraph";
+import { getRpoCompanyGraph, getRpoSubject, RpoDatabaseError } from "../../lib/rpo";
 
 export const runtime = "nodejs";
 
@@ -17,6 +18,8 @@ export default async function CompanyProfilePage({
 
   let subject;
   let error = "";
+  let graph;
+  let graphError = "";
   try {
     subject = await getRpoSubject(id);
   } catch (cause) {
@@ -25,6 +28,18 @@ export default async function CompanyProfilePage({
         ? cause.message
         : "Nepodarilo sa načítať údaje z lokálnej databázy registra RPO.";
     console.error("RPO entity lookup failed", cause);
+  }
+
+  if (subject) {
+    try {
+      graph = getRpoCompanyGraph(id);
+    } catch (cause) {
+      graphError =
+        cause instanceof RpoDatabaseError
+          ? cause.message
+          : "Grafické väzby sa nepodarilo načítať.";
+      console.error("RPO relationship graph lookup failed", cause);
+    }
   }
 
   if (!subject && !error) notFound();
@@ -122,6 +137,15 @@ export default async function CompanyProfilePage({
                   ))}
                 </ul>
               </section>
+            ) : null}
+
+            {graphError ? (
+              <section className="profile-activity relationship-section" role="alert">
+                <span className="eyebrow">Grafické väzby</span>
+                <p>{graphError}</p>
+              </section>
+            ) : graph ? (
+              <RelationshipGraph company={subject} graph={graph} />
             ) : null}
 
             <p className="data-source-note">
