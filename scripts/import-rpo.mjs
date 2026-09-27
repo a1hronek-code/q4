@@ -318,6 +318,7 @@ async function main() {
 
   const database = new DatabaseSync(buildingPath);
   let totalRecords = 0;
+  let registryRecords = 0;
   try {
     if (dailyOnly) {
       const existingRecords = database.prepare("SELECT count(*) AS count FROM subjects").get();
@@ -342,7 +343,8 @@ async function main() {
       totalRecords += await importFile(database, statement, localPath, file.key, index + 1, files.length);
     }
 
-    console.log(`Vytváram fulltextový index pre ${totalRecords.toLocaleString("sk-SK")} záznamov...`);
+    registryRecords = Number(database.prepare("SELECT count(*) AS count FROM subjects").get().count);
+    console.log(`Vytváram fulltextový index pre ${registryRecords.toLocaleString("sk-SK")} záznamov...`);
     addSearchIndex(database);
   } finally {
     database.close();
@@ -361,7 +363,7 @@ async function main() {
   console.log(
     `Hotovo: ${statSync(databasePath).size.toLocaleString("sk-SK")} bajtov v ${databasePath}`,
   );
-  console.log(`Záznamov v registri: ${totalRecords.toLocaleString("sk-SK")}`);
+  console.log(`Záznamov v registri: ${registryRecords.toLocaleString("sk-SK")}`);
 }
 
 main().catch((error) => {
