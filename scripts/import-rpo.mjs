@@ -277,9 +277,14 @@ function addSearchIndex(database) {
 }
 
 async function main() {
+  const dailyOnly = process.env.RPO_DAILY_ONLY === "1";
   mkdirSync(downloadDirectory, { recursive: true });
-  rmSync(buildingPath, { force: true });
-  rmSync(previousPath, { force: true });
+  if (!dailyOnly) {
+    rmSync(buildingPath, { force: true });
+    rmSync(previousPath, { force: true });
+  } else if (!existsSync(buildingPath)) {
+    fail("Databáza na pokračovanie importu neexistuje.");
+  }
 
   const [snapshots, dailyFiles] = await Promise.all([
     listObjects("batch-init/"),
@@ -293,32 +298,42 @@ async function main() {
   if (!snapshotDate) fail("Verejné úložisko RPO neobsahuje inicializačnú dávku.");
 
   const snapshot = snapshots
-    .filter(({ key }) => key.includes(`init_${snapshotDate}_`))
+    .filter(({ key }) => key.includes(`init_${snapshotDate}_`) && key.endsWith(".json.gz"))
     .sort((left, right) => left.key.localeCompare(right.key));
   const daily = dailyFiles
     .filter(({ key }) => {
       const date = key.match(/actual_(\d{4}-\d{2}-\d{2})\.json\.gz$/)?.[1];
-      return date && date > snapshotDate;
+      return key.endsWith(".json.gz") && date && date > snapshotDate;
     })
     .sort((left, right) => left.key.localeCompare(right.key));
-  const files = [...snapshot, ...daily];
+  const files = dailyOnly ? daily : [...snapshot, ...daily];
   const totalSize = files.reduce((sum, file) => sum + file.size, 0);
 
   console.log(
-    `Register RPO: snapshot ${snapshotDate}, ${snapshot.length} častí, ${daily.length} denných zmien.`,
+    dailyOnly
+      ? `Pokračujem dennými zmenami pre snapshot ${snapshotDate}: ${daily.length} súborov.`
+      : `Register RPO: snapshot ${snapshotDate}, ${snapshot.length} častí, ${daily.length} denných zmien.`,
   );
   console.log(`Prenos približne ${(totalSize / 1024 / 1024).toFixed(1)} MB.`);
 
   const database = new DatabaseSync(buildingPath);
   let totalRecords = 0;
   try {
-    database.exec(`
-      PRAGMA journal_mode = DELETE;
-      PRAGMA synchronous = NORMAL;
-      PRAGMA temp_store = MEMORY;
-      PRAGMA cache_size = -131072;
-      ${schema}
-    `);
+    if (dailyOnly) {
+      const existingRecords = database.prepare("SELECT count(*) AS count FROM subjects").get();
+      totalRecords = Number(existingRecords.count);
+      if (!Number.isSafeInteger(totalRecords) || totalRecords < 2_000_000) {
+        fail("Databáza na pokračovanie neobsahuje celý RPO snapshot.");
+      }
+    } else {
+      database.exec(`
+        PRAGMA journal_mode = DELETE;
+        PRAGMA synchronous = NORMAL;
+        PRAGMA temp_store = MEMORY;
+        PRAGMA cache_size = -131072;
+        ${schema}
+      `);
+    }
     const statement = database.prepare(upsert);
 
     for (let index = 0; index < files.length; index++) {

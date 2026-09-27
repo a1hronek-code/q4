@@ -32,6 +32,16 @@ Opätovné spustenie `npm run data:import` vytvorí novú databázu z najnovšie
 snapshotu a všetkých neskorších denných dávok. Pôvodná databáza zostane
 nedotknutá, kým sa nová dávka úspešne nestiahne a nezindexuje.
 
+Ak import skončí po úspešnom spracovaní celého snapshotu, ale pred dennými
+zmenami, možno pokračovať bez opätovného sťahovania snapshotu:
+
+```powershell
+$env:RPO_DAILY_ONLY = "1"; npm run data:import
+```
+
+Tento režim použite iba vtedy, ak terminál potvrdil dokončenie všetkých častí
+snapshotu. Pri chybe počas snapshotu spustite bežný `npm run data:import`.
+
 ## Zdroj a licencia
 
 - [Dokumentácia REST API a dátových exportov RPO](https://rpo.minv.sk/rpo-api-doc.html)
