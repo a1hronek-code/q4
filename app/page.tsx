@@ -32,8 +32,8 @@ const officeCards = [
 const apiCards = [
   {
     title: "Register právnických osôb",
-    status: "Živé REST API",
-    note: "Vyhľadávanie podľa názvu alebo IČO a detail záznamu subjektu.",
+    status: "Oficiálny export",
+    note: "Vyhľadávanie podľa názvu alebo IČO a profily subjektov.",
     href: "https://rpo.minv.sk/rpo-api-doc.html",
   },
   {
@@ -82,15 +82,15 @@ export default function Home() {
           <span className="eyebrow">Portál pre podnikanie, štát a korporácie</span>
           <h1>Všetko, čo potrebujete vedieť o podnikaní na Slovensku.</h1>
           <p>
-            Vyhľadávajte právnické osoby a podnikateľov priamo v registri RPO Ministerstva
-            vnútra SR. Výsledky aj profily čerpajú údaje z oficiálneho verejného API.
+            Vyhľadávajte právnické osoby a podnikateľov v registrovom exporte RPO Ministerstva
+            vnútra SR. Každý subjekt má medailónik s dostupnými údajmi z oficiálneho registra.
           </p>
 
           <SearchPanel />
 
           <div className="hero-metrics">
             <div className="metric-item">
-              <strong>REST API</strong>
+              <strong>Oficiálne RPO</strong>
               <span>zdroj údajov</span>
             </div>
             <div className="metric-item">
@@ -219,7 +219,7 @@ export default function Home() {
           <span className="eyebrow">Overiteľný zdroj</span>
           <h2>Údaje z registra bez vymyslených firemných profilov.</h2>
           <ul className="check-list">
-            <li>Výsledky načítavame z verejného REST API Registra právnických osôb.</li>
+            <li>Údaje čerpáme z verejného exportu Registra právnických osôb MV SR.</li>
             <li>Vyhľadávať môžete podľa názvu alebo IČO a filtrovať aktívne záznamy.</li>
             <li>Detail subjektu sa načíta priamo z rovnakého štátneho zdroja.</li>
             <li>Zdrojové údaje sú denne aktualizované a zverejnené pod licenciou CC BY 4.0.</li>

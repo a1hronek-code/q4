@@ -10,6 +10,7 @@ type SearchResult = {
   industry: string;
   legalForm: string;
   ico: string;
+  legalStatus: string;
   shortDescription: string;
 };
 
@@ -131,7 +132,7 @@ export function SearchPanel() {
                 <span className="company-city">{item.city || "Sídlo neuvedené"}</span>
               </div>
               <h3>{item.name}</h3>
-              <p>{item.industry || item.shortDescription}</p>
+              <p>{item.industry || item.legalStatus}</p>
               <div className="company-meta">
                 <span>{item.shortDescription}</span>
                 <span>{item.ico ? `IČO ${item.ico}` : `ID ${item.id}`}</span>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getRpoSubject, RpoApiError } from "../../lib/rpo";
+import { getRpoSubject, RpoDatabaseError } from "../../lib/rpo";
+
+export const runtime = "nodejs";
 
 export default async function CompanyProfilePage({
   params,
@@ -19,9 +21,9 @@ export default async function CompanyProfilePage({
     subject = await getRpoSubject(id);
   } catch (cause) {
     error =
-      cause instanceof RpoApiError
+      cause instanceof RpoDatabaseError
         ? cause.message
-        : "Nepodarilo sa načítať údaje zo slovenského registra RPO.";
+        : "Nepodarilo sa načítať údaje z lokálnej databázy registra RPO.";
     console.error("RPO entity lookup failed", cause);
   }
 
@@ -80,8 +82,8 @@ export default async function CompanyProfilePage({
                 <strong>{subject.ico || "V registri neuvedené"}</strong>
               </div>
               <div className="mini-stat soft">
-                <span>Sídlo</span>
-                <strong>{subject.city || "V registri neuvedené"}</strong>
+                <span>Stav</span>
+                <strong>{subject.legalStatus}</strong>
               </div>
               <div className="mini-stat soft">
                 <span>Právna forma</span>
@@ -93,15 +95,37 @@ export default async function CompanyProfilePage({
               </div>
             </div>
 
-            {subject.activity ? (
+            {subject.address ? (
               <section className="profile-activity">
-                <span className="eyebrow">Ekonomická činnosť</span>
-                <p>{subject.activity}</p>
+                <span className="eyebrow">Sídlo</span>
+                <p>{subject.address}</p>
+              </section>
+            ) : null}
+
+            {subject.activities.length > 0 ? (
+              <section className="profile-activity">
+                <span className="eyebrow">Predmety činnosti</span>
+                <ul className="profile-list">
+                  {subject.activities.map((activity, index) => (
+                    <li key={`${index}-${activity}`}>{activity}</li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {subject.statutoryBodies.length > 0 ? (
+              <section className="profile-activity">
+                <span className="eyebrow">Štatutárne orgány</span>
+                <ul className="profile-list">
+                  {subject.statutoryBodies.map((person, index) => (
+                    <li key={`${index}-${person}`}>{person}</li>
+                  ))}
+                </ul>
               </section>
             ) : null}
 
             <p className="data-source-note">
-              Zdroj: Register právnických osôb MV SR, denne aktualizované údaje ·{" "}
+              Zdroj: Register právnických osôb MV SR ·{" "}
               <a
                 href="https://rpo.minv.sk/rpo-api-doc.html"
                 target="_blank"

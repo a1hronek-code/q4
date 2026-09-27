@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { RPO_SOURCE_URL, RpoApiError, searchRpo } from "../../lib/rpo";
+import { RPO_SOURCE_URL, RpoDatabaseError, searchRpo } from "../../lib/rpo";
+
+export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -21,13 +23,14 @@ export async function GET(request: NextRequest) {
   try {
     const results = await searchRpo(query, category === "aktivne");
     return NextResponse.json({
-      results: results.slice(0, 20).map((subject) => ({
+      results: results.results.map((subject) => ({
         id: subject.id,
         name: subject.name,
         city: subject.city,
-        industry: subject.activity,
+        industry: subject.activities[0] ?? "",
         legalForm: subject.legalForm,
         ico: subject.ico,
+        legalStatus: subject.legalStatus,
         category: "subjekt",
         shortDescription: [
           subject.legalForm,
@@ -37,16 +40,21 @@ export async function GET(request: NextRequest) {
           .filter(Boolean)
           .join(" · "),
       })),
-      total: results.length,
+      total: results.total,
       query,
       source: RPO_SOURCE_URL,
     });
   } catch (error) {
-    console.error("RPO search failed", error);
+    if (!(error instanceof RpoDatabaseError)) {
+      console.error("Local RPO search failed", error);
+    }
     const message =
-      error instanceof RpoApiError
+      error instanceof RpoDatabaseError
         ? error.message
-        : "Vyhľadávanie v slovenskom registri RPO zlyhalo.";
-    return NextResponse.json({ error: message }, { status: 502 });
+        : "Vyhľadávanie v lokálnej databáze RPO zlyhalo.";
+    return NextResponse.json(
+      { error: message },
+      { status: error instanceof RpoDatabaseError ? error.statusCode : 500 },
+    );
   }
 }

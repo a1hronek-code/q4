@@ -26,8 +26,8 @@ export default function CompanyDirectoryPage() {
           <span className="eyebrow">Register právnických osôb MV SR</span>
           <h1>Vyhľadajte firmu alebo iný subjekt</h1>
           <p className="directory-intro">
-            Výsledky sa načítajú priamo z verejného REST API slovenského registra RPO.
-            Vyhľadávať môžete podľa názvu alebo IČO.
+            Vyhľadávanie používa lokálny fulltextový index oficiálneho exportu RPO.
+            Hľadať môžete podľa názvu, IČO, sídla alebo činnosti.
           </p>
         </div>
 
