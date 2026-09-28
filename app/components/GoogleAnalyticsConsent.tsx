@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const measurementId = "G-7265T1HV9S";
@@ -29,7 +30,7 @@ function initializeGoogleAnalytics() {
     ad_personalization: "denied",
   });
   window.gtag("js", new Date());
-  window.gtag("config", measurementId);
+  window.gtag("config", measurementId, { send_page_view: false });
 }
 
 function updateGoogleAnalyticsConsent(choice: ConsentChoice) {
@@ -57,7 +58,9 @@ function updateGoogleAnalyticsConsent(choice: ConsentChoice) {
 }
 
 export function GoogleAnalyticsConsent() {
+  const pathname = usePathname();
   const consentRef = useRef<ConsentChoice | null>(null);
+  const lastTrackedPathRef = useRef("");
   const [choice, setChoice] = useState<ConsentChoice | null>(null);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [analyticsStarted, setAnalyticsStarted] = useState(false);
@@ -91,8 +94,22 @@ export function GoogleAnalyticsConsent() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (choice !== "accepted") {
+      lastTrackedPathRef.current = "";
+      return;
+    }
+    if (!scriptReady || lastTrackedPathRef.current === pathname) return;
+
+    window.gtag?.("event", "page_view", {
+      page_path: pathname,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+    lastTrackedPathRef.current = pathname;
+  }, [choice, pathname, scriptReady]);
+
   function choose(choice: ConsentChoice) {
-    const wasRevoked = consentRef.current === "rejected";
     consentRef.current = choice;
     setChoice(choice);
     setPreferencesOpen(false);
@@ -108,13 +125,6 @@ export function GoogleAnalyticsConsent() {
       setAnalyticsStarted(true);
     }
     updateGoogleAnalyticsConsent(choice);
-    if (choice === "accepted" && wasRevoked && scriptReady) {
-      window.gtag?.("event", "page_view", {
-        page_path: window.location.pathname,
-        page_location: window.location.href,
-        page_title: document.title,
-      });
-    }
   }
 
   function handleScriptReady() {

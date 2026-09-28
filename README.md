@@ -105,5 +105,6 @@ GA4 je zapojené s meracím ID `G-7265T1HV9S`. Skript sa načíta až po výslov
 súhlase návštevníka; rozhodnutie možno neskôr zmeniť cez „Nastavenia cookies“.
 Pri odmietnutí alebo odvolaní súhlasu sa analytické cookies odstránia a ďalšie
 meranie sa zastaví. Zobrazenia stránok pri navigácii v aplikácii sleduje GA4
-Enhanced Measurement; v nastaveniach webového streamu ponechajte zapnutú voľbu
-zmeny stránok podľa udalostí histórie prehliadača.
+tag po súhlase posiela ako samostatné udalosti. V nastaveniach webového streamu
+vypnite v Enhanced Measurement voľbu zmien stránok podľa udalostí histórie
+prehliadača, aby sa pri navigácii neodosielali duplicitné zobrazenia.
