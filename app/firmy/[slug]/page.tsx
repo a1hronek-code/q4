@@ -51,7 +51,7 @@ export default async function CompanyProfilePage({
           <span className="brand-mark">Q4</span>
           <span>
             <span className="brand-name">Q4.sk</span>
-            <span className="brand-subtitle">Údaje z registra RPO</span>
+            <span className="brand-subtitle">Firemná inteligencia</span>
           </span>
         </Link>
         <nav className="nav" aria-label="Navigácia">

@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Q4.sk | Portál pre podnikanie, štát a korporácie",
+  title: "Q4.sk | Firemná inteligencia pre Slovensko",
   description:
-    "Moderný slovenský informačný portál o firmách, podnikaní, štáte, korporáciách a ekonomike.",
+    "Zistite, kto stojí za firmou. Vyhľadajte slovenské spoločnosti, konateľov, spoločníkov a prepojenia medzi firmami.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

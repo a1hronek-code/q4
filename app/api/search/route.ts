@@ -9,7 +9,10 @@ export async function GET(request: NextRequest) {
   const category = (searchParams.get("category") ?? "vsetko").trim().toLowerCase();
 
   if (!query) {
-    return NextResponse.json({ error: "Zadajte názov subjektu alebo IČO." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Zadajte názov firmy, osoby alebo IČO." },
+      { status: 400 },
+    );
   }
 
   if (query.length > 150) {

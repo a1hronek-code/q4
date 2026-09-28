@@ -41,7 +41,7 @@ export function SearchPanel() {
     const trimmedQuery = query.trim();
 
     if (!trimmedQuery) {
-      setError("Zadajte názov subjektu alebo IČO.");
+      setError("Zadajte názov firmy, osoby alebo IČO.");
       setResults([]);
       setHasSearched(false);
       return;
@@ -81,14 +81,14 @@ export function SearchPanel() {
       <form
         className="search-shell"
         onSubmit={runSearch}
-        aria-label="Vyhľadávanie v registri RPO"
+        aria-label="Vyhľadávanie firiem a osôb"
       >
         <div className="search-field">
-          <label htmlFor="rpo-search">Hľadať subjekt</label>
+          <label htmlFor="rpo-search">Hľadať firmu alebo osobu</label>
           <input
             id="rpo-search"
-            aria-label="Názov spoločnosti alebo IČO"
-            placeholder="Názov spoločnosti alebo IČO"
+            aria-label="Názov firmy, osoby alebo IČO"
+            placeholder="Názov firmy, osoby alebo IČO"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             autoComplete="organization"
