@@ -106,6 +106,8 @@ export default function Home() {
         </div>
       </section>
 
+      <MarketOverview />
+
       <RelationshipPreview />
 
       <section className="capabilities-section" id="schopnosti">
@@ -163,8 +165,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      <MarketOverview />
 
       <section className="tool-section" id="kalkulacky">
         <div className="section-heading">

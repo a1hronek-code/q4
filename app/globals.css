@@ -1467,6 +1467,10 @@ a.api-card:hover {
   margin-top: 76px;
 }
 
+.intelligence-hero + .market-section {
+  margin-top: 42px;
+}
+
 .relationship-preview {
   position: relative;
   padding: 32px 32px 20px;
@@ -1851,9 +1855,13 @@ a.api-card:hover {
 
 .market-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-top: 24px;
+}
+
+.exchange-card {
+  grid-column: 1 / -1;
 }
 
 .market-card {
@@ -1913,6 +1921,41 @@ a.api-card:hover {
   border-bottom: 1px solid rgba(222, 229, 240, 0.8);
 }
 
+.exchange-list li {
+  display: block;
+  padding: 0;
+}
+
+.currency-select {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 8px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 140ms ease, box-shadow 140ms ease;
+}
+
+.currency-select:hover,
+.currency-select.is-selected {
+  background: #f0f5ff;
+}
+
+.currency-select.is-selected {
+  box-shadow: inset 3px 0 #4d7dd2;
+}
+
+.currency-select:focus-visible,
+.period-switch button:focus-visible {
+  outline: 2px solid #4d7dd2;
+  outline-offset: 2px;
+}
+
 .currency-code {
   min-width: 38px;
   color: #315f9f;
@@ -1932,6 +1975,150 @@ a.api-card:hover {
   font-size: 0.84rem;
   font-variant-numeric: tabular-nums;
   text-align: right;
+}
+
+.currency-detail {
+  margin-top: 17px;
+  padding: 17px 16px 13px;
+  border: 1px solid #e4ebf5;
+  border-radius: 15px;
+  background: linear-gradient(150deg, #fbfdff, #f4f7fc);
+}
+
+.currency-detail-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.currency-detail-heading > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.currency-detail-heading > div:first-child > span {
+  color: #62738e;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.currency-detail-heading > div:first-child > strong {
+  color: #172947;
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.rate-change {
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.rate-change.positive {
+  color: #15805a;
+}
+
+.rate-change.negative {
+  color: #bd4550;
+}
+
+.period-switch {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid #e2e8f1;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.period-switch button {
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #728099;
+  font-size: 0.63rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.period-switch button.is-selected {
+  background: #eaf1ff;
+  color: #315f9f;
+}
+
+.rate-chart-wrap {
+  margin-top: 12px;
+}
+
+.rate-chart {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.chart-gridline {
+  stroke: #e5ebf4;
+  stroke-dasharray: 3 5;
+  stroke-width: 1;
+}
+
+.rate-history-line,
+.rate-forecast-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.rate-history-line {
+  stroke: #467bd1;
+}
+
+.rate-forecast-line {
+  stroke: #e59b36;
+  stroke-dasharray: 7 6;
+  stroke-width: 2.5;
+}
+
+.chart-dates {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #8a96a9;
+  font-size: 0.61rem;
+}
+
+.history-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-top: 11px;
+  color: #79869a;
+  font-size: 0.66rem;
+}
+
+.history-summary strong {
+  padding-left: 3px;
+  color: #334663;
+  font-variant-numeric: tabular-nums;
+}
+
+.forecast-note {
+  margin: 10px 0 0;
+  color: #8490a2;
+  font-size: 0.62rem;
+  line-height: 1.55;
+}
+
+.history-loading,
+.history-error {
+  min-height: auto;
+  padding: 14px 0 4px;
+  font-size: 0.72rem;
 }
 
 .market-source {
