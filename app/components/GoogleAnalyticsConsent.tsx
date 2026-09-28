@@ -10,7 +10,7 @@ type ConsentChoice = "accepted" | "rejected";
 
 declare global {
   interface Window {
-    dataLayer?: unknown[];
+    dataLayer?: Array<unknown | IArguments>;
     gtag?: (...args: unknown[]) => void;
     [key: `ga-disable-${string}`]: boolean | undefined;
   }
@@ -20,8 +20,10 @@ function initializeGoogleAnalytics() {
   if (window.gtag) return;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = function (...args: unknown[]) {
-    window.dataLayer?.push(args);
+  window.gtag = function () {
+    // gtag.js consumes the original arguments object from its queue.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
   };
   window.gtag("consent", "default", {
     analytics_storage: "denied",
