@@ -58,9 +58,14 @@ Export môže byť až o 24 hodín pozadu oproti aktuálnemu stavu registra.
 ## Online nasadenie
 
 Databáza je zámerne ignorovaná v Gite: ide o veľký súbor, ktorý sa pravidelne
-obnovuje. Produkčné nasadenie preto potrebuje Node.js runtime (nie čisto
-statický hosting) a trvalé úložisko alebo spravovanú SQLite/PostgreSQL databázu.
+obnovuje. Vyhľadávanie a profily preto používajú lokálnu databázu, ak je dostupná,
+a inak prechádzajú na verejný REST endpoint registra RPO. Hostovaná aplikácia tak
+môže vytvárať dynamické profily subjektov bez kopírovania celého exportu do
+deploymentu. Pri dostupnej lokálnej databáze profil navyše zobrazí graf väzieb
+medzi firmami; vzdialený detail RPO obsahuje medailónik, štatutárov,
+spoločníkov a ďalšie registrové údaje, nie však tento odvodený graf.
+
+Prístup k lokálnemu exportu vyžaduje Node.js runtime a súbor `data/rpo.sqlite`.
 Súbory v `data/` sa nezahŕňajú do Next.js output tracingu, preto treba databázu
-sprístupniť aplikácii v `data/rpo.sqlite` nezávisle od build procesu.
-Príkaz `npm run build` používa Webpack, aby zostavenie nebolo závislé od veľkosti
-lokálneho databázového súboru.
+sprístupniť aplikácii nezávisle od build procesu. Príkaz `npm run build` používa
+Webpack, aby zostavenie nebolo závislé od veľkosti lokálneho databázového súboru.

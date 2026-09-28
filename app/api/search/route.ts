@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { RPO_SOURCE_URL, RpoDatabaseError, searchRpo } from "../../lib/rpo";
+import { RPO_SOURCE_URL, RpoDatabaseError } from "../../lib/rpo";
+import { searchRpoAvailable } from "../../lib/rpo-data";
 
 export const runtime = "nodejs";
 
@@ -24,7 +25,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const results = await searchRpo(query, category === "aktivne");
+    const results = await searchRpoAvailable(query, category === "aktivne");
     return NextResponse.json({
       results: results.results.map((subject) => ({
         id: subject.id,

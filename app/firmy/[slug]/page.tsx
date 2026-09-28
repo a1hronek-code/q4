@@ -1,9 +1,42 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RelationshipGraph } from "../../components/RelationshipGraph";
-import { getRpoCompanyGraph, getRpoSubject, RpoDatabaseError } from "../../lib/rpo";
+import { getRpoCompanyGraph, hasRpoDatabase, RpoDatabaseError } from "../../lib/rpo";
+import { getRpoSubjectAvailable } from "../../lib/rpo-data";
 
 export const runtime = "nodejs";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  if (!/^\d+$/.test(slug)) return {};
+  const id = Number(slug);
+  if (!Number.isSafeInteger(id) || id <= 0) return {};
+
+  try {
+    const subject = await getRpoSubjectAvailable(id);
+    if (!subject) return {};
+    const description = [
+      subject.legalForm,
+      subject.city ? `Sídlo: ${subject.city}` : "",
+      subject.ico ? `IČO: ${subject.ico}` : "",
+      subject.activities[0] || "",
+    ]
+      .filter(Boolean)
+      .join(" · ");
+    return {
+      title: `${subject.name} | Q4.sk`,
+      description: description || `Firemný medailónik subjektu ${subject.name} z registra RPO.`,
+    };
+  } catch (cause) {
+    console.error("RPO profile metadata lookup failed", cause);
+    return {};
+  }
+}
 
 export default async function CompanyProfilePage({
   params,
@@ -21,16 +54,16 @@ export default async function CompanyProfilePage({
   let graph;
   let graphError = "";
   try {
-    subject = await getRpoSubject(id);
+    subject = await getRpoSubjectAvailable(id);
   } catch (cause) {
     error =
       cause instanceof RpoDatabaseError
         ? cause.message
-        : "Nepodarilo sa načítať údaje z lokálnej databázy registra RPO.";
+        : "Nepodarilo sa načítať údaje z registra RPO.";
     console.error("RPO entity lookup failed", cause);
   }
 
-  if (subject) {
+  if (subject && hasRpoDatabase()) {
     try {
       graph = getRpoCompanyGraph(id);
     } catch (cause) {
@@ -110,6 +143,20 @@ export default async function CompanyProfilePage({
               </div>
             </div>
 
+            <section className="profile-activity">
+              <span className="eyebrow">Firemný medailónik</span>
+              <p>
+                {subject.name}
+                {subject.legalForm ? ` je subjekt s právnou formou ${subject.legalForm}` : ""}
+                {subject.city ? ` so sídlom v meste ${subject.city}` : ""}
+                {subject.establishment
+                  ? `, zapísaný do registra od ${subject.establishment}`
+                  : ""}
+                . Stav v registri: {subject.legalStatus}.
+                {subject.activities[0] ? ` Hlavná evidovaná činnosť: ${subject.activities[0]}` : ""}
+              </p>
+            </section>
+
             {subject.address ? (
               <section className="profile-activity">
                 <span className="eyebrow">Sídlo</span>
@@ -137,6 +184,23 @@ export default async function CompanyProfilePage({
                   ))}
                 </ul>
               </section>
+            ) : null}
+
+            {subject.stakeholders.length > 0 ? (
+              <section className="profile-activity">
+                <span className="eyebrow">Spoločníci a zainteresované osoby</span>
+                <ul className="profile-list">
+                  {subject.stakeholders.map((person, index) => (
+                    <li key={`${index}-${person}`}>{person}</li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {subject.lastUpdated ? (
+              <p className="data-source-note">
+                Posledná aktualizácia v zdrojovom registri: {subject.lastUpdated}
+              </p>
             ) : null}
 
             {graphError ? (

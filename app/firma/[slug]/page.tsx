@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { popularCompanies } from "../../lib/popular-companies";
-import { getRpoSubject, RpoDatabaseError, searchRpo } from "../../lib/rpo";
+import { RpoDatabaseError } from "../../lib/rpo";
+import { getRpoSubjectAvailable, searchRpoAvailable } from "../../lib/rpo-data";
 
 export const runtime = "nodejs";
 
@@ -15,11 +16,11 @@ export default async function PopularCompanyProfilePage({
   if (!company) notFound();
 
   try {
-    const results = await searchRpo(company.ico, true);
+    const results = await searchRpoAvailable(company.ico, true);
     const subject = results.results.find((result) => result.ico === company.ico);
     if (!subject) notFound();
 
-    const profile = await getRpoSubject(subject.id);
+    const profile = await getRpoSubjectAvailable(subject.id);
     if (!profile) notFound();
     redirect(`/firmy/${profile.id}`);
   } catch (cause) {

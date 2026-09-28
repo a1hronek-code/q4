@@ -18,6 +18,8 @@ export type RpoSubject = {
   sourceRegister: string;
   activities: string[];
   statutoryBodies: string[];
+  stakeholders: string[];
+  lastUpdated: string;
 };
 
 type SubjectRow = {
@@ -157,12 +159,31 @@ function toSubject(row: SubjectRow, payload: unknown): RpoSubject {
   ].filter(Boolean);
 
   const activities = asArray(record.activities)
+    .filter((activity) => !firstText(asRecord(activity)?.validTo))
     .map((activity) => firstText(activity))
     .filter(Boolean);
   const statutoryBodies = asArray(record.statutoryBodies)
+    .filter((body) => !firstText(asRecord(body)?.validTo))
     .map((body) => {
       const details = asRecord(body);
       const name =
+        firstText(details?.fullName) ||
+        [
+          firstText(asRecord(details?.personName)?.givenNames),
+          firstText(asRecord(details?.personName)?.familyNames),
+        ]
+          .filter(Boolean)
+          .join(" ");
+      const role = firstText(details?.stakeholderType);
+      return name ? (role ? `${name} · ${role}` : name) : "";
+    })
+    .filter(Boolean);
+  const stakeholders = asArray(record.stakeholders)
+    .filter((stakeholder) => !firstText(asRecord(stakeholder)?.validTo))
+    .map((stakeholder) => {
+      const details = asRecord(stakeholder);
+      const name =
+        firstText(asRecord(details?.personName)?.formatedName) ||
         firstText(details?.fullName) ||
         [
           firstText(asRecord(details?.personName)?.givenNames),
@@ -188,8 +209,10 @@ function toSubject(row: SubjectRow, payload: unknown): RpoSubject {
     termination: row.termination,
     address: addressParts.join(", "),
     sourceRegister: firstText(asRecord(record.sourceRegister)?.value),
-    activities,
-    statutoryBodies,
+    activities: [...new Set(activities)],
+    statutoryBodies: [...new Set(statutoryBodies)],
+    stakeholders: [...new Set(stakeholders)],
+    lastUpdated: firstText(record.dbModificationDate),
   };
 }
 
@@ -405,6 +428,10 @@ export function getRpoSubject(id: number): RpoSubject | null {
   } finally {
     database.close();
   }
+}
+
+export function hasRpoDatabase(): boolean {
+  return existsSync(DATABASE_PATH);
 }
 
 export const RPO_SOURCE_URL = "https://rpo.minv.sk/rpo-api-doc.html";
