@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { NearbyStations } from "./NearbyStations";
+import { NewsCard } from "./NewsCard";
 
 type MarketData = {
   exchangeRates: {
@@ -167,10 +169,9 @@ export function MarketOverview() {
       <div className="section-heading market-heading">
         <div>
           <span className="eyebrow">Prehľad trhu</span>
-          <h2 id="market-title">Kurzy mien a počasie</h2>
+          <h2 id="market-title">Kurzy, počasie a správy</h2>
           <p className="directory-intro">
-            Kurzy ECB s históriou a orientačným trendom, počasie v Bratislave a
-            priemerné ceny palív.
+            Kurzy ECB, počasie v Bratislave, správy z ekonomiky a prehľad cien palív.
           </p>
         </div>
         <div className="market-refresh">
@@ -194,70 +195,72 @@ export function MarketOverview() {
           </div>
           {market?.exchangeRates.data ? (
             <>
-              <ul className="exchange-list">
-                {Object.entries(market.exchangeRates.data.rates).map(([code, value]) => (
-                  <li key={code}>
-                    <button
-                      type="button"
-                      className={`currency-select${selectedCurrency === code ? " is-selected" : ""}`}
-                      aria-pressed={selectedCurrency === code}
-                      onClick={() => setSelectedCurrency(code)}
-                    >
-                      <span className="currency-code">{code}</span>
-                      <span className="currency-name">{currencyNames[code] ?? code}</span>
-                      <strong>{numberFormatter.format(value)}</strong>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              {history || historyLoading || historyError ? (
-                <div className="currency-detail" aria-live="polite">
-                  <div className="currency-detail-heading">
-                    <div>
-                      <span>{selectedCurrency} · {currencyNames[selectedCurrency]}</span>
-                      {history ? (
-                        <>
-                          <strong>{numberFormatter.format(history.points.at(-1)?.rate ?? 0)} {selectedCurrency}</strong>
-                          <small className={history.changePercent >= 0 ? "rate-change positive" : "rate-change negative"}>
-                            {history.changePercent >= 0 ? "+" : ""}{numberFormatter.format(history.changePercent)} % za obdobie
-                          </small>
-                        </>
-                      ) : null}
-                    </div>
-                    <div className="period-switch" aria-label="Obdobie histórie kurzu">
-                      {(Object.keys(periods) as Period[]).map((period) => (
-                        <button
-                          key={period}
-                          type="button"
-                          aria-pressed={selectedPeriod === period}
-                          className={selectedPeriod === period ? "is-selected" : ""}
-                          onClick={() => setSelectedPeriod(period)}
-                        >
-                          {period.toUpperCase()}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  {historyLoading ? (
-                    <p className="market-loading history-loading">Načítavam históriu kurzu…</p>
-                  ) : historyError ? (
-                    <p className="market-error history-error" role="alert">{historyError}</p>
-                  ) : history ? (
-                    <>
-                      <RateHistoryChart history={history} />
-                      <div className="history-summary">
-                        <span>Minimum <strong>{numberFormatter.format(history.low)}</strong></span>
-                        <span>Maximum <strong>{numberFormatter.format(history.high)}</strong></span>
-                        <span>Predikcia <strong>{numberFormatter.format(history.forecast.at(-1)?.rate ?? 0)}</strong></span>
+              <div className="exchange-content-grid">
+                <ul className="exchange-list">
+                  {Object.entries(market.exchangeRates.data.rates).map(([code, value]) => (
+                    <li key={code}>
+                      <button
+                        type="button"
+                        className={`currency-select${selectedCurrency === code ? " is-selected" : ""}`}
+                        aria-pressed={selectedCurrency === code}
+                        onClick={() => setSelectedCurrency(code)}
+                      >
+                        <span className="currency-code">{code}</span>
+                        <span className="currency-name">{currencyNames[code] ?? code}</span>
+                        <strong>{numberFormatter.format(value)}</strong>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                {history || historyLoading || historyError ? (
+                  <div className="currency-detail" aria-live="polite">
+                    <div className="currency-detail-heading">
+                      <div>
+                        <span>{selectedCurrency} · {currencyNames[selectedCurrency]}</span>
+                        {history ? (
+                          <>
+                            <strong>{numberFormatter.format(history.points.at(-1)?.rate ?? 0)} {selectedCurrency}</strong>
+                            <small className={history.changePercent >= 0 ? "rate-change positive" : "rate-change negative"}>
+                              {history.changePercent >= 0 ? "+" : ""}{numberFormatter.format(history.changePercent)} % za obdobie
+                            </small>
+                          </>
+                        ) : null}
                       </div>
-                      <p className="forecast-note">
-                        Predikcia na 5 pracovných dní je jednoduché predĺženie trendu posledných 20 kurzov,
-                        nie prognóza ECB ani investičné odporúčanie.
-                      </p>
-                    </>
-                  ) : null}
-                </div>
-              ) : null}
+                      <div className="period-switch" aria-label="Obdobie histórie kurzu">
+                        {(Object.keys(periods) as Period[]).map((period) => (
+                          <button
+                            key={period}
+                            type="button"
+                            aria-pressed={selectedPeriod === period}
+                            className={selectedPeriod === period ? "is-selected" : ""}
+                            onClick={() => setSelectedPeriod(period)}
+                          >
+                            {period.toUpperCase()}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    {historyLoading ? (
+                      <p className="market-loading history-loading">Načítavam históriu kurzu…</p>
+                    ) : historyError ? (
+                      <p className="market-error history-error" role="alert">{historyError}</p>
+                    ) : history ? (
+                      <>
+                        <RateHistoryChart history={history} />
+                        <div className="history-summary">
+                          <span>Minimum <strong>{numberFormatter.format(history.low)}</strong></span>
+                          <span>Maximum <strong>{numberFormatter.format(history.high)}</strong></span>
+                          <span>Predikcia <strong>{numberFormatter.format(history.forecast.at(-1)?.rate ?? 0)}</strong></span>
+                        </div>
+                        <p className="forecast-note">
+                          Predikcia na 5 pracovných dní je jednoduché predĺženie trendu posledných 20 kurzov,
+                          nie prognóza ECB ani investičné odporúčanie.
+                        </p>
+                      </>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
               <p className="market-source">
                 Referenčný kurz k {formatDate(market.exchangeRates.data.date)} ·{" "}
                 <a
@@ -308,6 +311,8 @@ export function MarketOverview() {
           )}
         </article>
 
+        <NewsCard />
+
         <article className="market-card fuel-card">
           <div className="market-card-heading">
             <span className="market-icon">⛽</span>
@@ -339,6 +344,18 @@ export function MarketOverview() {
             </p>
           )}
         </article>
+
+        <article className="market-card stations-card">
+          <div className="market-card-heading">
+            <span className="market-icon">⌖</span>
+            <div>
+              <h3>Čerpacie stanice</h3>
+              <span>Najbližšie podľa vašej polohy</span>
+            </div>
+          </div>
+          <NearbyStations />
+        </article>
+
       </div>
     </section>
   );
@@ -346,7 +363,7 @@ export function MarketOverview() {
 
 function RateHistoryChart({ history }: { history: CurrencyHistory }) {
   const width = 640;
-  const height = 188;
+  const height = 148;
   const padding = { top: 18, right: 12, bottom: 25, left: 12 };
   const values = [
     ...history.points.map((point) => point.rate),

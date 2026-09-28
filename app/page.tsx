@@ -200,6 +200,7 @@ export default function Home() {
           <Link href="/firmy">Vyhľadávanie firiem</Link>
           <a href="#vztahy">Obchodné vzťahy</a>
           <a href="#trhy">Prehľad trhu</a>
+          <Link href="/admin/clanky">Administrácia článkov</Link>
         </div>
       </footer>
     </main>
