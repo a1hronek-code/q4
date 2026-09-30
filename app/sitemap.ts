@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
+import { calculators } from "./lib/calculators";
+import { elections } from "./lib/elections";
+import { holidays } from "./lib/holidays";
 import { popularCompanies } from "./lib/popular-companies";
+import { schoolHolidays } from "./lib/school-holidays";
 
 const siteUrl = "https://www.q4.sk";
 
@@ -19,6 +23,56 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/firmy/${company.id}`,
       changeFrequency: "weekly" as const,
       priority: 0.7,
+    })),
+    {
+      url: `${siteUrl}/kalkulacky`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    ...calculators.map((calculator) => ({
+      url: `${siteUrl}/kalkulacky/${calculator.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    {
+      url: `${siteUrl}/pocasie`,
+      changeFrequency: "hourly",
+      priority: 0.6,
+    },
+    {
+      url: `${siteUrl}/meniny`,
+      changeFrequency: "daily",
+      priority: 0.6,
+    },
+    {
+      url: `${siteUrl}/volby`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    ...elections.map((election) => ({
+      url: `${siteUrl}/volby/${election.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    })),
+    {
+      url: `${siteUrl}/sviatky`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    ...holidays.map((holiday) => ({
+      url: `${siteUrl}/sviatky/${holiday.slug}-${holiday.date.slice(0, 4)}`,
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
+    })),
+    {
+      url: `${siteUrl}/prazdniny`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    ...schoolHolidays.map((holiday) => ({
+      url: `${siteUrl}/prazdniny/${holiday.slug}`,
+      changeFrequency: "yearly" as const,
+      priority: 0.5,
     })),
   ];
 }

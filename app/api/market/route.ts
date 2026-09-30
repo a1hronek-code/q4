@@ -19,6 +19,13 @@ type CurrentWeather = {
   weatherCode: number;
   description: string;
   windSpeed: number;
+  tomorrow: {
+    date: string;
+    minTemperature: number;
+    maxTemperature: number;
+    weatherCode: number;
+    description: string;
+  } | null;
 };
 
 type FuelPrices = {
@@ -72,9 +79,21 @@ async function loadExchangeRates(): Promise<ExchangeRates> {
   return { date, rates };
 }
 
+function asNumberArray(value: unknown): number[] | null {
+  return Array.isArray(value) && value.every((entry) => typeof entry === "number")
+    ? (value as number[])
+    : null;
+}
+
+function asStringArray(value: unknown): string[] | null {
+  return Array.isArray(value) && value.every((entry) => typeof entry === "string")
+    ? (value as string[])
+    : null;
+}
+
 async function loadWeather(): Promise<CurrentWeather> {
   const response = await fetch(
-    "https://api.open-meteo.com/v1/forecast?latitude=48.1486&longitude=17.1077&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=Europe%2FBratislava",
+    "https://api.open-meteo.com/v1/forecast?latitude=48.1486&longitude=17.1077&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Europe%2FBratislava&forecast_days=3",
     { next: { revalidate: 900 } },
   );
   if (!response.ok) throw new Error(`Open-Meteo returned HTTP ${response.status}`);
@@ -96,6 +115,23 @@ async function loadWeather(): Promise<CurrentWeather> {
     throw new Error("Open-Meteo returned incomplete current-weather data");
   }
 
+  const daily = asRecord(body?.daily);
+  const dailyDates = asStringArray(daily?.time);
+  const dailyMax = asNumberArray(daily?.temperature_2m_max);
+  const dailyMin = asNumberArray(daily?.temperature_2m_min);
+  const dailyCode = asNumberArray(daily?.weather_code);
+  // Index 0 is today; index 1 is tomorrow when three forecast days are requested.
+  const tomorrow =
+    dailyDates && dailyMax && dailyMin && dailyCode && dailyDates.length > 1
+      ? {
+          date: dailyDates[1],
+          maxTemperature: dailyMax[1],
+          minTemperature: dailyMin[1],
+          weatherCode: dailyCode[1],
+          description: weatherDescription(dailyCode[1]),
+        }
+      : null;
+
   return {
     time,
     temperature,
@@ -103,6 +139,7 @@ async function loadWeather(): Promise<CurrentWeather> {
     weatherCode,
     description: weatherDescription(weatherCode),
     windSpeed,
+    tomorrow,
   };
 }
 

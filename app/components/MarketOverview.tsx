@@ -2,21 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { NearbyStations } from "./NearbyStations";
-import { NewsCard } from "./NewsCard";
 
 type MarketData = {
   exchangeRates: {
     data: { date: string; rates: Record<string, number> } | null;
-    error: string | null;
-  };
-  weather: {
-    data: {
-      time: string;
-      temperature: number;
-      feelsLike: number;
-      description: string;
-      windSpeed: number;
-    } | null;
     error: string | null;
   };
   fuelPrices: {
@@ -169,9 +158,9 @@ export function MarketOverview() {
       <div className="section-heading market-heading">
         <div>
           <span className="eyebrow">Prehľad trhu</span>
-          <h2 id="market-title">Kurzy, počasie a správy</h2>
+          <h2 id="market-title">Kurzy mien a ceny palív</h2>
           <p className="directory-intro">
-            Kurzy ECB, počasie v Bratislave, správy z ekonomiky a prehľad cien palív.
+            Kurzy ECB s históriou a predikciou, priemerné ceny palív a najbližšie čerpacie stanice.
           </p>
         </div>
         <div className="market-refresh">
@@ -278,40 +267,6 @@ export function MarketOverview() {
             </p>
           )}
         </article>
-
-        <article className="market-card weather-card">
-          <div className="market-card-heading">
-            <span className="market-icon">☀</span>
-            <div>
-              <h3>Počasie</h3>
-              <span>Bratislava · teraz</span>
-            </div>
-          </div>
-          {market?.weather.data ? (
-            <>
-              <div className="weather-reading">
-                <strong>{numberFormatter.format(market.weather.data.temperature)}°</strong>
-                <span>{market.weather.data.description}</span>
-              </div>
-              <div className="weather-details">
-                <span>Pocitovo {numberFormatter.format(market.weather.data.feelsLike)}°C</span>
-                <span>Vietor {numberFormatter.format(market.weather.data.windSpeed)} km/h</span>
-              </div>
-              <p className="market-source">
-                {formatDateTime(market.weather.data.time)} ·{" "}
-                <a href="https://predpovedpocasia.sk/" target="_blank" rel="noreferrer">
-                  Predpoveď počasia
-                </a>
-              </p>
-            </>
-          ) : (
-            <p className={loading ? "market-loading" : "market-error"} role={loading ? undefined : "status"}>
-              {loading ? "Načítavam počasie…" : market?.weather.error ?? "Počasie nie je dostupné."}
-            </p>
-          )}
-        </article>
-
-        <NewsCard />
 
         <article className="market-card fuel-card">
           <div className="market-card-heading">

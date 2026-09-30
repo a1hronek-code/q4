@@ -1,8 +1,13 @@
 import Link from "next/link";
-import { BusinessTools } from "./components/BusinessTools";
+import { HighlightsWidget } from "./components/HighlightsWidget";
 import { MarketOverview } from "./components/MarketOverview";
+import { NewsCard } from "./components/NewsCard";
 import { RelationshipPreview } from "./components/RelationshipPreview";
 import { SearchPanel } from "./components/SearchPanel";
+import { SiteFooter } from "./components/SiteFooter";
+import { SiteHeader } from "./components/SiteHeader";
+import { TodayWidget } from "./components/TodayWidget";
+import { calculators } from "./lib/calculators";
 import { popularCompanies } from "./lib/popular-companies";
 
 const q4Features = [
@@ -53,28 +58,9 @@ const q4Features = [
 export default function Home() {
   return (
     <main className="page-shell intelligence-page">
-      <header className="topbar">
-        <Link href="/" className="brand-wrap" aria-label="Q4.sk – domov">
-          <span className="brand-mark">Q4</span>
-          <span>
-            <span className="brand-name">Q4.sk</span>
-            <span className="brand-subtitle">Firemná inteligencia</span>
-          </span>
-        </Link>
+      <SiteHeader />
 
-        <nav className="nav" aria-label="Hlavná navigácia">
-          <a href="#vyhladavanie">Vyhľadávanie</a>
-          <a href="#vztahy">Vzťahy</a>
-          <a href="#schopnosti">Čo dokáže Q4</a>
-          <a href="#trhy">Trhy</a>
-        </nav>
-
-        <div className="actions">
-          <Link className="primary-btn" href="/firmy">Preskúmať firmy</Link>
-        </div>
-      </header>
-
-      <section className="hero intelligence-hero">
+      <section className="hero intelligence-hero hero-compact">
         <div className="hero-copy">
           <span className="eyebrow">Firemná inteligencia</span>
           <h1>Zistite, kto stojí za firmou.</h1>
@@ -89,21 +75,12 @@ export default function Home() {
             <span>Verejne dostupné zdroje</span>
           </div>
         </div>
-        <div className="hero-orbit" aria-hidden="true">
-          <div className="orbit-ring orbit-ring-outer" />
-          <div className="orbit-ring orbit-ring-inner" />
-          <span className="orbit-node orbit-node-main">Q4</span>
-          <span className="orbit-node orbit-node-person orbit-person-one">JN</span>
-          <span className="orbit-node orbit-node-company orbit-company-one">DG</span>
-          <span className="orbit-node orbit-node-person orbit-person-two">PH</span>
-          <span className="orbit-node orbit-node-company orbit-company-two">AI</span>
-          <span className="orbit-line orbit-line-one" />
-          <span className="orbit-line orbit-line-two" />
-          <span className="orbit-line orbit-line-three" />
-          <span className="orbit-line orbit-line-four" />
-          <span className="orbit-label orbit-label-company">Firma</span>
-          <span className="orbit-label orbit-label-network">Obchodná sieť</span>
-        </div>
+        <TodayWidget />
+      </section>
+
+      <section className="info-row" aria-label="Správy a dôležité termíny">
+        <NewsCard />
+        <HighlightsWidget />
       </section>
 
       <MarketOverview />
@@ -171,10 +148,19 @@ export default function Home() {
           <span className="eyebrow">Osobné financie</span>
           <h2>Užitočné kalkulačky</h2>
           <p className="directory-intro">
-            Čistá mzda, hypotéka, sviatky a ďalšie praktické prehľady pre Slovensko.
+            Čistá mzda, hypotéka, dávky a ďalšie praktické prepočty pre Slovensko – vyberte kalkulačku.
           </p>
         </div>
-        <BusinessTools />
+        <div className="calculator-grid">
+          {calculators.map((calculator) => (
+            <Link key={calculator.slug} href={`/kalkulacky/${calculator.slug}`} className="calculator-card">
+              <span className="calculator-icon" aria-hidden="true">{calculator.icon}</span>
+              <strong>{calculator.title}</strong>
+              <p>{calculator.description}</p>
+              <span className="calculator-cta">Otvoriť kalkulačku <span aria-hidden="true">→</span></span>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="data-note-section" id="zdroje-dat">
@@ -191,18 +177,7 @@ export default function Home() {
         </a>
       </section>
 
-      <footer className="footer intelligence-footer">
-        <Link href="/" className="footer-brand">
-          <span className="brand-mark">Q4</span>
-          <strong>Q4.sk <span>•</span> Firemná inteligencia pre Slovensko</strong>
-        </Link>
-        <div className="footer-links">
-          <Link href="/firmy">Vyhľadávanie firiem</Link>
-          <a href="#vztahy">Obchodné vzťahy</a>
-          <a href="#trhy">Prehľad trhu</a>
-          <Link href="/admin/clanky">Administrácia článkov</Link>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
