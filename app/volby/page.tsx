@@ -5,11 +5,16 @@ import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { elections, getNextElection } from "../lib/elections";
 import { daysUntil } from "../lib/holidays";
+import { openGraphFor } from "../lib/seo";
+
+const title = "Najbližšie voľby na Slovensku | Q4.sk";
+const description =
+  "Prehľad najbližších slovenských volieb s termínmi, stavom potvrdenia a odpočtom do hlasovania.";
 
 export const metadata: Metadata = {
-  title: "Najbližšie voľby na Slovensku | Q4.sk",
-  description:
-    "Prehľad najbližších slovenských volieb s termínmi, stavom potvrdenia a odpočtom do hlasovania.",
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/volby" }),
 };
 
 const dateFormatter = new Intl.DateTimeFormat("sk-SK", {

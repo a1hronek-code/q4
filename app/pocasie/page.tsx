@@ -3,11 +3,16 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { PocasieClient } from "./PocasieClient";
+import { openGraphFor } from "../lib/seo";
+
+const title = "Počasie Bratislava – aktuálne a predpoveď | Q4.sk";
+const description =
+  "Aktuálne počasie v Bratislave, pocitová teplota, vietor a predpoveď na zajtra.";
 
 export const metadata: Metadata = {
-  title: "Počasie Bratislava – aktuálne a predpoveď | Q4.sk",
-  description:
-    "Aktuálne počasie v Bratislave, pocitová teplota, vietor a predpoveď na zajtra.",
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/pocasie" }),
 };
 
 export default function PocasiePage() {

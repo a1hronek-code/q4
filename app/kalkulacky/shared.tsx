@@ -5,6 +5,7 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { getCalculatorMeta } from "../lib/calculators";
+import { breadcrumbJsonLd, jsonLdScriptProps, openGraphFor } from "../lib/seo";
 
 export function getRequiredCalculatorMeta(slug: string) {
   const calculator = getCalculatorMeta(slug);
@@ -17,6 +18,11 @@ export function buildCalculatorMetadata(slug: string): Metadata {
   return {
     title: `${calculator.title} | Q4.sk`,
     description: calculator.description,
+    ...openGraphFor({
+      title: `${calculator.title} | Q4.sk`,
+      description: calculator.description,
+      path: `/kalkulacky/${slug}`,
+    }),
   };
 }
 
@@ -28,18 +34,18 @@ export function CalculatorPageLayout({
   children: ReactNode;
 }) {
   const calculator = getRequiredCalculatorMeta(slug);
+  const breadcrumbItems = [
+    { label: "Domov", href: "/" },
+    { label: "Kalkulačky", href: "/kalkulacky" },
+    { label: calculator.shortTitle },
+  ];
 
   return (
     <main className="page-shell intelligence-page">
+      <script {...jsonLdScriptProps(breadcrumbJsonLd(breadcrumbItems))} />
       <SiteHeader />
       <div className="detail-page-shell">
-        <Breadcrumb
-          items={[
-            { label: "Domov", href: "/" },
-            { label: "Kalkulačky", href: "/kalkulacky" },
-            { label: calculator.shortTitle },
-          ]}
-        />
+        <Breadcrumb items={breadcrumbItems} />
 
         <section className="detail-page-header">
           <span className="eyebrow">Kalkulačka</span>

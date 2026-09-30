@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { type FormEvent, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { type FormEvent, useEffect, useState } from "react";
 
 type SearchResult = {
   id: number;
@@ -29,17 +30,15 @@ function getOfficialSearchUrl(query: string, category: string): string {
 }
 
 export function SearchPanel() {
-  const [query, setQuery] = useState("");
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(() => searchParams.get("query") ?? "");
   const [category, setCategory] = useState("vsetko");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
-  async function runSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmedQuery = query.trim();
-
+  async function search(trimmedQuery: string, searchCategory: string) {
     if (!trimmedQuery) {
       setError("Zadajte názov firmy, osoby alebo IČO.");
       setResults([]);
@@ -54,7 +53,7 @@ export function SearchPanel() {
     try {
       const url = new URL("/api/search", window.location.origin);
       url.searchParams.set("query", trimmedQuery);
-      url.searchParams.set("category", category);
+      url.searchParams.set("category", searchCategory);
 
       const response = await fetch(url);
       const data = (await response.json()) as SearchResponse;
@@ -75,6 +74,24 @@ export function SearchPanel() {
       setLoading(false);
     }
   }
+
+  function runSearch(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void search(query.trim(), category);
+  }
+
+  // Auto-run the search when the page is opened with a ?query= parameter,
+  // e.g. from a person link in the relationship graph. Deferred to a
+  // microtask so state updates don't happen synchronously inside the effect.
+  useEffect(() => {
+    const paramQuery = searchParams.get("query");
+    if (paramQuery && paramQuery.trim()) {
+      queueMicrotask(() => {
+        void search(paramQuery.trim(), "vsetko");
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="search-panel-wrap" id="vyhladavanie">

@@ -4,11 +4,16 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { calculators } from "../lib/calculators";
+import { openGraphFor } from "../lib/seo";
+
+const title = "Kalkulačky | Q4.sk";
+const description =
+  "Praktické kalkulačky pre čistú mzdu, hypotéku, sociálne dávky a ďalšie osobné financie na Slovensku.";
 
 export const metadata: Metadata = {
-  title: "Kalkulačky | Q4.sk",
-  description:
-    "Praktické kalkulačky pre čistú mzdu, hypotéku, sociálne dávky a ďalšie osobné financie na Slovensku.",
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/kalkulacky" }),
 };
 
 export default function CalculatorsIndexPage() {

@@ -1,9 +1,25 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Breadcrumb } from "../components/Breadcrumb";
 import { SearchPanel } from "../components/SearchPanel";
+import { breadcrumbJsonLd, jsonLdScriptProps, openGraphFor } from "../lib/seo";
+
+const title = "Vyhľadávanie firiem v registri RPO | Q4.sk";
+const description =
+  "Vyhľadajte slovenskú firmu, živnostníka alebo inštitúciu podľa názvu, IČO, sídla či predmetu činnosti v registri právnických osôb MV SR.";
+const breadcrumbItems = [{ label: "Domov", href: "/" }, { label: "Firmy" }];
+
+export const metadata: Metadata = {
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/firmy" }),
+};
 
 export default function CompanyDirectoryPage() {
   return (
     <main className="page-shell">
+      <script {...jsonLdScriptProps(breadcrumbJsonLd(breadcrumbItems))} />
       <header className="topbar">
         <Link href="/" className="brand-wrap" aria-label="Q4.sk – domov">
           <span className="brand-mark">Q4</span>
@@ -22,6 +38,8 @@ export default function CompanyDirectoryPage() {
       </header>
 
       <section className="tool-section">
+        <Breadcrumb items={breadcrumbItems} />
+
         <div className="section-heading">
           <span className="eyebrow">Register právnických osôb MV SR</span>
           <h1>Vyhľadajte firmu alebo iný subjekt</h1>
@@ -31,7 +49,9 @@ export default function CompanyDirectoryPage() {
           </p>
         </div>
 
-        <SearchPanel />
+        <Suspense fallback={<div className="search-panel-wrap" aria-hidden="true" />}>
+          <SearchPanel />
+        </Suspense>
       </section>
 
       <p className="data-source-note">

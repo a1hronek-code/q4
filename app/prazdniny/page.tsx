@@ -4,11 +4,16 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { schoolHolidays } from "../lib/school-holidays";
+import { openGraphFor } from "../lib/seo";
+
+const title = "Školské prázdniny 2026/2027 | Q4.sk";
+const description =
+  "Kalendár školských prázdnin na Slovensku pre školský rok 2026/2027 vrátane regionálnych jarných prázdnin.";
 
 export const metadata: Metadata = {
-  title: "Školské prázdniny 2026/2027 | Q4.sk",
-  description:
-    "Kalendár školských prázdnin na Slovensku pre školský rok 2026/2027 vrátane regionálnych jarných prázdnin.",
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/prazdniny" }),
 };
 
 const dateFormatter = new Intl.DateTimeFormat("sk-SK", {

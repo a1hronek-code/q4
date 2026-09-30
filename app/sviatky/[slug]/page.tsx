@@ -5,6 +5,7 @@ import { Breadcrumb } from "../../components/Breadcrumb";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { holidays, daysUntil } from "../../lib/holidays";
+import { openGraphFor } from "../../lib/seo";
 
 const holidayNotes: Record<string, string> = {
   "den-vzniku-sr":
@@ -100,10 +101,13 @@ export async function generateMetadata({
   if (!holiday) return {};
 
   const year = new Date(holiday.date).getFullYear();
+  const title = `${holiday.name} ${year} | Q4.sk`;
+  const description = `${holidayNotes[holiday.slug]} Dátum v roku ${year}: ${formatDate(holiday.date)}.`;
 
   return {
-    title: `${holiday.name} ${year} | Q4.sk`,
-    description: `${holidayNotes[holiday.slug]} Dátum v roku ${year}: ${formatDate(holiday.date)}.`,
+    title,
+    description,
+    ...openGraphFor({ title, description, path: `/sviatky/${slug}` }),
   };
 }
 

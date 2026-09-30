@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumb } from "../../components/Breadcrumb";
 import { RelationshipGraph } from "../../components/RelationshipGraph";
 import { getRpoCompanyGraph, hasRpoDatabase, RpoDatabaseError } from "../../lib/rpo";
 import { getRpoSubjectAvailable } from "../../lib/rpo-data";
+import { breadcrumbJsonLd, jsonLdScriptProps, openGraphFor } from "../../lib/seo";
 
 export const runtime = "nodejs";
 
@@ -28,9 +30,17 @@ export async function generateMetadata({
     ]
       .filter(Boolean)
       .join(" · ");
+    const title = `${subject.name} | Q4.sk`;
+    const resolvedDescription =
+      description || `Firemný medailónik subjektu ${subject.name} z registra RPO.`;
     return {
-      title: `${subject.name} | Q4.sk`,
-      description: description || `Firemný medailónik subjektu ${subject.name} z registra RPO.`,
+      title,
+      description: resolvedDescription,
+      ...openGraphFor({
+        title,
+        description: resolvedDescription,
+        path: `/firmy/${slug}`,
+      }),
     };
   } catch (cause) {
     console.error("RPO profile metadata lookup failed", cause);
@@ -77,8 +87,29 @@ export default async function CompanyProfilePage({
 
   if (!subject && !error) notFound();
 
+  const breadcrumbItems = [
+    { label: "Domov", href: "/" },
+    { label: "Firmy", href: "/firmy" },
+    { label: subject?.name ?? `Subjekt #${id}` },
+  ];
+
+  const organizationJsonLd = subject
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: subject.name,
+        ...(subject.ico ? { identifier: subject.ico, taxID: subject.ico } : {}),
+        ...(subject.legalForm ? { legalName: subject.name, additionalType: subject.legalForm } : {}),
+        ...(subject.address ? { address: subject.address } : {}),
+        ...(subject.establishment ? { foundingDate: subject.establishment } : {}),
+        url: `https://www.q4.sk/firmy/${id}`,
+      }
+    : null;
+
   return (
     <main className="page-shell">
+      {organizationJsonLd ? <script {...jsonLdScriptProps(organizationJsonLd)} /> : null}
+      <script {...jsonLdScriptProps(breadcrumbJsonLd(breadcrumbItems))} />
       <header className="topbar">
         <Link href="/" className="brand-wrap" aria-label="Q4.sk – domov">
           <span className="brand-mark">Q4</span>
@@ -97,6 +128,7 @@ export default async function CompanyProfilePage({
       </header>
 
       <section className="profile-section">
+        <Breadcrumb items={breadcrumbItems} />
         {error ? (
           <div className="profile-error" role="alert">
             <span className="eyebrow">Register RPO</span>

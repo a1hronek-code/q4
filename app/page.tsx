@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { HighlightsWidget } from "./components/HighlightsWidget";
 import { MarketOverview } from "./components/MarketOverview";
 import { NewsCard } from "./components/NewsCard";
@@ -68,7 +69,9 @@ export default function Home() {
             Vyhľadajte konateľov, spoločníkov, prepojené firmy, obchodné väzby a verejne
             dostupné informácie o slovenských subjektoch.
           </p>
-          <SearchPanel />
+          <Suspense fallback={<div className="search-panel-wrap" aria-hidden="true" />}>
+            <SearchPanel />
+          </Suspense>
           <div className="hero-trustline">
             <span><i aria-hidden="true" />Vyhľadávanie firiem a osôb</span>
             <span>Prepojenia zobrazené v interaktívnom grafe</span>

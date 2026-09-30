@@ -6,6 +6,7 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { schoolHolidays } from "../../lib/school-holidays";
 import { daysUntil } from "../../lib/holidays";
+import { openGraphFor } from "../../lib/seo";
 
 const dateFormatter = new Intl.DateTimeFormat("sk-SK", {
   day: "numeric",
@@ -63,9 +64,13 @@ export async function generateMetadata({
 
   if (!holiday) return {};
 
+  const title = `${holiday.name} | Q4.sk`;
+  const description = `Termín školských prázdnin: ${formatRange(holiday.start, holiday.end)}.`;
+
   return {
-    title: `${holiday.name} | Q4.sk`,
-    description: `Termín školských prázdnin: ${formatRange(holiday.start, holiday.end)}.`,
+    title,
+    description,
+    ...openGraphFor({ title, description, path: `/prazdniny/${slug}` }),
   };
 }
 

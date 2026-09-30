@@ -4,11 +4,16 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { formatNameDayLabel, getNameDayNames } from "../lib/nameday";
+import { openGraphFor } from "../lib/seo";
+
+const title = "Meninový kalendár na Slovensku | Q4.sk";
+const description =
+  "Denný meninový kalendár pre Slovensko s dnešnými a zajtrajšími meninami a prehľadom celého mesiaca.";
 
 export const metadata: Metadata = {
-  title: "Meninový kalendár na Slovensku | Q4.sk",
-  description:
-    "Denný meninový kalendár pre Slovensko s dnešnými a zajtrajšími meninami a prehľadom celého mesiaca.",
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/meniny" }),
 };
 
 export const revalidate = 3600;

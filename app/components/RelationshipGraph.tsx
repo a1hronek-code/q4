@@ -99,20 +99,25 @@ export function RelationshipGraph({ company, graph }: RelationshipGraphProps) {
           </Link>
 
           {personRows.map(({ person, y }) => (
-            <g
+            <Link
               key={person.id}
-              className={`relationship-node person-node${person.active ? "" : " is-historical"}`}
-              transform={`translate(424 ${y - 30})`}
-              role="img"
-              aria-label={`${person.name}: ${person.roles.join(", ") || "osoba uvedená v RPO"} · ${person.active ? "má aktívnu väzbu" : "iba historická väzba"}`}
+              href={`/firmy?query=${encodeURIComponent(person.name)}`}
+              className="relationship-node-link"
+              aria-label={`Vyhľadať osobu ${person.name} v registri`}
+              title={`${person.name}${person.roles.length ? ` · ${person.roles.join(", ")}` : ""}`}
             >
-              <rect width="272" height="60" rx="15" />
-              <circle cx="20" cy="20" r="5" className="relationship-status-dot" />
-              <text x="34" y="25" className="relationship-node-title">{shorten(person.name, 27)}</text>
-              <text x="16" y="46" className="relationship-node-detail">
-                {shorten(person.roles.join(" · ") || "Osoba uvedená v RPO", 37)}
-              </text>
-            </g>
+              <g
+                className={`relationship-node person-node${person.active ? "" : " is-historical"}`}
+                transform={`translate(424 ${y - 30})`}
+              >
+                <rect width="272" height="60" rx="15" />
+                <circle cx="20" cy="20" r="5" className="relationship-status-dot" />
+                <text x="34" y="25" className="relationship-node-title">{shorten(person.name, 27)}</text>
+                <text x="16" y="46" className="relationship-node-detail">
+                  {shorten(person.roles.join(" · ") || "Osoba uvedená v RPO", 37)}
+                </text>
+              </g>
+            </Link>
           ))}
 
           {companyRows.map(({ company: relatedCompany, y }) => {

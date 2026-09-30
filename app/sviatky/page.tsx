@@ -4,11 +4,16 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { getHolidaysForYear } from "../lib/holidays";
+import { openGraphFor } from "../lib/seo";
+
+const title = "Štátne sviatky na Slovensku 2026/2027 | Q4.sk";
+const description =
+  "Kalendár slovenských štátnych sviatkov a dní pracovného pokoja pre roky 2026 a 2027.";
 
 export const metadata: Metadata = {
-  title: "Štátne sviatky na Slovensku 2026/2027 | Q4.sk",
-  description:
-    "Kalendár slovenských štátnych sviatkov a dní pracovného pokoja pre roky 2026 a 2027.",
+  title,
+  description,
+  ...openGraphFor({ title, description, path: "/sviatky" }),
 };
 
 const dateFormatter = new Intl.DateTimeFormat("sk-SK", {

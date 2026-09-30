@@ -6,6 +6,7 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
 import { elections } from "../../lib/elections";
 import { daysUntil } from "../../lib/holidays";
+import { openGraphFor } from "../../lib/seo";
 
 const dateFormatter = new Intl.DateTimeFormat("sk-SK", {
   day: "numeric",
@@ -50,9 +51,13 @@ export async function generateMetadata({
 
   if (!election) return {};
 
+  const title = `${election.name} | Q4.sk`;
+  const description = `${election.description} Termín: ${formatDate(election.date)}.`;
+
   return {
-    title: `${election.name} | Q4.sk`,
-    description: `${election.description} Termín: ${formatDate(election.date)}.`,
+    title,
+    description,
+    ...openGraphFor({ title, description, path: `/volby/${slug}` }),
   };
 }
 
