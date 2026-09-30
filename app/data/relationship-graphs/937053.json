@@ -1,0 +1,310 @@
+{
+  "id": 937053,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "ing. maros grund",
+        "name": "Ing. Maroš Grund",
+        "roles": [
+          "Člen dozorného orgánu",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. matej bosnak, - predseda",
+        "name": "Ing. Matej Bošňák, - predseda",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. miroslav trnka",
+        "name": "Ing. Miroslav Trnka",
+        "roles": [
+          "Konateľ",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. peter pasko",
+        "name": "Ing. Peter Paško",
+        "roles": [
+          "Konateľ",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. richard marko",
+        "name": "Ing. Richard Marko",
+        "roles": [
+          "Konateľ",
+          "Prokurista",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "jan hruby",
+        "name": "Ján Hrubý",
+        "roles": [
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "rndr. anton zajac",
+        "name": "RNDr. Anton Zajac",
+        "roles": [
+          "Člen dozorného orgánu",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "mgr. elena hruba",
+        "name": "Mgr. Elena Hrubá",
+        "roles": [
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": false
+      },
+      {
+        "id": "miroslav trnka",
+        "name": "Miroslav Trnka",
+        "roles": [
+          "Konateľ",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": false
+      },
+      {
+        "id": "rudolf hruby",
+        "name": "Rudolf Hrubý",
+        "roles": [
+          "Konateľ",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": false
+      }
+    ],
+    "companies": [
+      {
+        "id": 1064453,
+        "name": "ADS PROPERTY, s. r. o.",
+        "ico": "47679212",
+        "city": "Bratislava-Staré Mesto"
+      },
+      {
+        "id": 1063407,
+        "name": "CONSULTARING s. r. o.",
+        "ico": "47459883",
+        "city": "Bratislava"
+      },
+      {
+        "id": 717834,
+        "name": "ePERSPEKTA, s.r.o.",
+        "ico": "46601546",
+        "city": "Bratislava - mestská časť Vajnory"
+      },
+      {
+        "id": 757399,
+        "name": "HASPOL, spol. s r.o.",
+        "ico": "31686281",
+        "city": "Spišská Nová Ves"
+      },
+      {
+        "id": 456590,
+        "name": "HATRI, s.r.o. v likvidácii",
+        "ico": "31333681",
+        "city": "Bratislava"
+      },
+      {
+        "id": 813431,
+        "name": "Hrubý s.r.o.",
+        "ico": "36831590",
+        "city": "Sládkovičovo"
+      },
+      {
+        "id": 2715003,
+        "name": "Ing. Ján Hrubý",
+        "ico": "33261768",
+        "city": "Sedliská"
+      },
+      {
+        "id": 16928933,
+        "name": "Ján Hrubý",
+        "ico": "55382975",
+        "city": "Prievidza"
+      },
+      {
+        "id": 1728306,
+        "name": "Ján Hrubý",
+        "ico": "43519024",
+        "city": "Nesluša"
+      },
+      {
+        "id": 1931215,
+        "name": "Ján Hrubý",
+        "ico": "35320478",
+        "city": "Spišská Nová Ves"
+      },
+      {
+        "id": 1626830,
+        "name": "Ján Hrubý",
+        "ico": "14069547",
+        "city": "Sereď"
+      },
+      {
+        "id": 943727,
+        "name": "JANA, spol. s r.o.",
+        "ico": "34115994",
+        "city": "Sládkovičovo"
+      }
+    ],
+    "relationships": [
+      {
+        "personId": "ing. miroslav trnka",
+        "companyId": 937053,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ing. peter pasko",
+        "companyId": 937053,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ing. richard marko",
+        "companyId": 937053,
+        "role": "Konateľ · Prokurista · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "miroslav trnka",
+        "companyId": 937053,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "rudolf hruby",
+        "companyId": 937053,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 937053,
+        "role": "Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ing. maros grund",
+        "companyId": 937053,
+        "role": "Člen dozorného orgánu · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ing. matej bosnak, - predseda",
+        "companyId": 937053,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "rndr. anton zajac",
+        "companyId": 937053,
+        "role": "Člen dozorného orgánu · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "mgr. elena hruba",
+        "companyId": 937053,
+        "role": "Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 16928933,
+        "role": "Podnikateľ",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 943727,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 813431,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 717834,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 1064453,
+        "role": "Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 1728306,
+        "role": "Podnikateľ",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 1063407,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 2715003,
+        "role": "Podnikateľ",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 1931215,
+        "role": "Podnikateľ",
+        "active": true
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 1626830,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 456590,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "jan hruby",
+        "companyId": 757399,
+        "role": "Konateľ",
+        "active": false
+      },
+      {
+        "personId": "rudolf hruby",
+        "companyId": 717834,
+        "role": "Konateľ",
+        "active": false
+      }
+    ]
+  }
+}

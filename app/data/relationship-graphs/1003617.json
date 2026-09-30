@@ -1,0 +1,301 @@
+{
+  "id": 1003617,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "andras svebis",
+        "name": "András Svébis",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ferenc horvath",
+        "name": "Ferenc Horváth",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. gabriel szabo",
+        "name": "Ing. Gabriel Szabó",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. jana matuskova",
+        "name": "Ing. Jana Matúšková",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. marek senkovic",
+        "name": "Ing. Marek Senkovič",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. peter baxa",
+        "name": "Ing. Peter Baxa",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. richard milosovic",
+        "name": "Ing. Richard Milošovič",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. slavomir hatina",
+        "name": "Ing. Slavomír Hatina",
+        "roles": [
+          "Predstavenstvo",
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. timea vegh reicher",
+        "name": "Ing. Tímea Végh Reicher",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "judr. miroslav lajcak",
+        "name": "JUDr. Miroslav Lajčák",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "krisztian pulay",
+        "name": "Krisztián Pulay",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "peter labancz",
+        "name": "Péter Labancz",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      }
+    ],
+    "companies": [
+      {
+        "id": 16554965,
+        "name": "Ferenc Horváth",
+        "ico": "54950155",
+        "city": "Dunajská Streda"
+      },
+      {
+        "id": 4316326,
+        "name": "Ferenc Horváth",
+        "ico": "43108741",
+        "city": "Zlatná na Ostrove"
+      },
+      {
+        "id": 195948,
+        "name": "FILTER & FLUID s.r.o.",
+        "ico": "44214405",
+        "city": "Číčov"
+      },
+      {
+        "id": 333836,
+        "name": "FP-PLANET, s.r.o.",
+        "ico": "44016999",
+        "city": "Komárno"
+      },
+      {
+        "id": 797708,
+        "name": "L-Žilina, s.r.o.",
+        "ico": "45897034",
+        "city": "Dunajská Streda"
+      },
+      {
+        "id": 244500,
+        "name": "Legends Store s.r.o.",
+        "ico": "44954247",
+        "city": "Nitra"
+      },
+      {
+        "id": 1063339,
+        "name": "PAPPAS 2015 s.r.o.",
+        "ico": "47460342",
+        "city": "Pribeta"
+      },
+      {
+        "id": 213464,
+        "name": "PONTINES s.r.o.",
+        "ico": "46786937",
+        "city": "Komárno"
+      },
+      {
+        "id": 990452,
+        "name": "THEBEN a.s.",
+        "ico": "35756047",
+        "city": "Bratislava"
+      },
+      {
+        "id": 16180496,
+        "name": "Združenie Szt. Lőrinc Egyesület",
+        "ico": "54473101",
+        "city": "Horné Saliby"
+      }
+    ],
+    "relationships": [
+      {
+        "personId": "ferenc horvath",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. gabriel szabo",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. marek senkovic",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. richard milosovic",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. slavomir hatina",
+        "companyId": 1003617,
+        "role": "Predstavenstvo · Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. timea vegh reicher",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "krisztian pulay",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "peter labancz",
+        "companyId": 1003617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "andras svebis",
+        "companyId": 1003617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "judr. miroslav lajcak",
+        "companyId": 1003617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. peter baxa",
+        "companyId": 1003617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. jana matuskova",
+        "companyId": 1003617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 16554965,
+        "role": "Podnikateľ · Vedúci organizačnej zložky",
+        "active": true
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 213464,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 1063339,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 16180496,
+        "role": "Iný štatutárny orgán",
+        "active": true
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 797708,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 4316326,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 195948,
+        "role": "Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 333836,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "ferenc horvath",
+        "companyId": 244500,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "ing. slavomir hatina",
+        "companyId": 990452,
+        "role": "Člen dozorného orgánu",
+        "active": false
+      }
+    ]
+  }
+}

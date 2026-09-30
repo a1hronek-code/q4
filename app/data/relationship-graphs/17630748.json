@@ -1,0 +1,197 @@
+{
+  "id": 17630748,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "dana repanova",
+        "name": "Dana Repáňová",
+        "roles": [
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      },
+      {
+        "id": "daniel cecetka",
+        "name": "Daniel Čečetka",
+        "roles": [
+          "Konateľ",
+          "Spoločník v.o.s. / s.r.o."
+        ],
+        "active": true
+      }
+    ],
+    "companies": [
+      {
+        "id": 3596695,
+        "name": "Daniel Čečetka DC 1970",
+        "ico": "33718628",
+        "city": "Pezinok"
+      },
+      {
+        "id": 536258,
+        "name": "DRIVE, s.r.o.",
+        "ico": "35805081",
+        "city": "Zvolen"
+      },
+      {
+        "id": 17366530,
+        "name": "EasyCredit s.r.o.",
+        "ico": "55818323",
+        "city": "Bratislava - mestská časť Staré Mesto"
+      },
+      {
+        "id": 709763,
+        "name": "RDN s.r.o.",
+        "ico": "35828552",
+        "city": "Bratislava"
+      },
+      {
+        "id": 1011656,
+        "name": "Renesans, a.s.",
+        "ico": "36230138",
+        "city": "Bratislava"
+      },
+      {
+        "id": 16912818,
+        "name": "RMG Catering s.r.o.",
+        "ico": "55337601",
+        "city": "Bratislava - mestská časť Staré Mesto"
+      },
+      {
+        "id": 554167,
+        "name": "RVN s.r.o.",
+        "ico": "35710390",
+        "city": "Bratislava"
+      },
+      {
+        "id": 200044,
+        "name": "StarTrek s.r.o.",
+        "ico": "35903422",
+        "city": "Bratislava"
+      },
+      {
+        "id": 792315,
+        "name": "Storm gastro s.r.o.",
+        "ico": "35765488",
+        "city": "Bratislava"
+      },
+      {
+        "id": 672829,
+        "name": "STORM PROMOTION, spol. s r.o.",
+        "ico": "34151516",
+        "city": "Bratislava"
+      },
+      {
+        "id": 6635181,
+        "name": "Svetová asociácia v behu do schodov - Towerrunning World Association",
+        "ico": "50224638",
+        "city": "Bratislava - mestská časť Staré Mesto"
+      },
+      {
+        "id": 248148,
+        "name": "Zemegula, s.r.o.",
+        "ico": "35865393",
+        "city": "Bratislava"
+      }
+    ],
+    "relationships": [
+      {
+        "personId": "daniel cecetka",
+        "companyId": 17630748,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "dana repanova",
+        "companyId": 17630748,
+        "role": "Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "dana repanova",
+        "companyId": 672829,
+        "role": "Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "dana repanova",
+        "companyId": 1011656,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 672829,
+        "role": "Spoločník v.o.s. / s.r.o. · Konateľ",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 1011656,
+        "role": "Predstavenstvo · Jediný akcionár a.s.",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 248148,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 16912818,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 200044,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 6635181,
+        "role": "Iný štatutárny orgán",
+        "active": true
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 3596695,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 554167,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 792315,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 17366530,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 709763,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "daniel cecetka",
+        "companyId": 536258,
+        "role": "Konateľ",
+        "active": false
+      }
+    ]
+  }
+}

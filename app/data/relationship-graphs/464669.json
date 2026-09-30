@@ -1,0 +1,230 @@
+{
+  "id": 464669,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "ing. andrea blazova",
+        "name": "Ing. Andrea Blažová",
+        "roles": [
+          "Prokurista"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. katarina gasparovska",
+        "name": "Ing. Katarína Gašparovská",
+        "roles": [
+          "Prokurista"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. klaudia drabikova",
+        "name": "Ing. Klaudia Drábiková",
+        "roles": [
+          "Prokurista"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. marek sasik",
+        "name": "Ing. Marek Sásik",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. michaela bauer",
+        "name": "Ing. Michaela Bauer",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. pavel cetkovsky",
+        "name": "Ing. Pavel Cetkovský",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. slavomir seemann",
+        "name": "Ing. Slavomír Seemann",
+        "roles": [
+          "Predstavenstvo",
+          "Prokurista"
+        ],
+        "active": true
+      },
+      {
+        "id": "jan homan",
+        "name": "Jan Homan",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "judr. richard foldes",
+        "name": "JUDr. Richard Főldeš",
+        "roles": [
+          "Prokurista"
+        ],
+        "active": true
+      },
+      {
+        "id": "juraj futak",
+        "name": "Juraj Futák",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "mag. alexandra habeler-drabek",
+        "name": "Mag. Alexandra Habeler-Drabek",
+        "roles": [
+          "Predstavenstvo",
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "mgr. alena adamcova",
+        "name": "Mgr. Alena Adamcová",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      }
+    ],
+    "companies": [
+      {
+        "id": 1012044,
+        "name": "LANED a.s.",
+        "ico": "35918918",
+        "city": "Bratislava"
+      },
+      {
+        "id": 4607214,
+        "name": "Odborový zväz bánk a poisťovní",
+        "ico": "30845416",
+        "city": "Bratislava - mestská časť Ružinov"
+      },
+      {
+        "id": 1001597,
+        "name": "Prvá stavebná sporiteľňa, a. s.",
+        "ico": "31335004",
+        "city": "Bratislava - mestská časť Ružinov"
+      }
+    ],
+    "relationships": [
+      {
+        "personId": "mag. alexandra habeler-drabek",
+        "companyId": 464669,
+        "role": "Predstavenstvo · Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. marek sasik",
+        "companyId": 464669,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. michaela bauer",
+        "companyId": 464669,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. pavel cetkovsky",
+        "companyId": 464669,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. slavomir seemann",
+        "companyId": 464669,
+        "role": "Predstavenstvo · Prokurista",
+        "active": true
+      },
+      {
+        "personId": "juraj futak",
+        "companyId": 464669,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "mgr. alena adamcova",
+        "companyId": 464669,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "jan homan",
+        "companyId": 464669,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "judr. richard foldes",
+        "companyId": 464669,
+        "role": "Prokurista",
+        "active": true
+      },
+      {
+        "personId": "ing. andrea blazova",
+        "companyId": 464669,
+        "role": "Prokurista",
+        "active": true
+      },
+      {
+        "personId": "ing. katarina gasparovska",
+        "companyId": 464669,
+        "role": "Prokurista",
+        "active": true
+      },
+      {
+        "personId": "ing. klaudia drabikova",
+        "companyId": 464669,
+        "role": "Prokurista",
+        "active": true
+      },
+      {
+        "personId": "ing. andrea blazova",
+        "companyId": 1012044,
+        "role": "Predstavenstvo",
+        "active": false
+      },
+      {
+        "personId": "ing. pavel cetkovsky",
+        "companyId": 1012044,
+        "role": "Člen dozorného orgánu",
+        "active": false
+      },
+      {
+        "personId": "ing. slavomir seemann",
+        "companyId": 1012044,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "juraj futak",
+        "companyId": 4607214,
+        "role": "Iný štatutárny orgán",
+        "active": true
+      },
+      {
+        "personId": "mag. alexandra habeler-drabek",
+        "companyId": 1001597,
+        "role": "Člen dozorného orgánu",
+        "active": false
+      }
+    ]
+  }
+}

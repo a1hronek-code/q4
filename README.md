@@ -63,7 +63,17 @@ a inak prechádzajú na verejný REST endpoint registra RPO. Hostovaná aplikác
 môže vytvárať dynamické profily subjektov bez kopírovania celého exportu do
 deploymentu. Pri dostupnej lokálnej databáze profil navyše zobrazí graf väzieb
 medzi firmami; vzdialený detail RPO obsahuje medailónik, štatutárov,
-spoločníkov a ďalšie registrové údaje, nie však tento odvodený graf.
+spoločníkov a ďalšie registrové údaje, nie však tento odvodený graf (oficiálne
+REST API neumožňuje fulltextové vyhľadávanie firiem podľa mena osoby).
+
+Pre vybrané populárne firmy (`app/lib/popular-companies.ts`) sa graf väzieb
+napriek tomu zobrazuje aj v produkcii – skript `node scripts/build-relationship-graphs.mjs`
+ho predpočíta z lokálnej databázy a uloží ako malé JSON snímky do
+`app/data/relationship-graphs/`, ktoré sa committujú do Gitu a Next.js ich
+zabalí do nasadenia. Spustite tento skript znova (a commitnite výstup) vždy,
+keď sa zmení `data/rpo.sqlite` alebo zoznam populárnych firiem. Pre ostatné
+subjekty sa namiesto grafu zobrazí informácia, že graf väzieb zatiaľ nie je
+k dispozícii.
 
 Prístup k lokálnemu exportu vyžaduje Node.js runtime a súbor `data/rpo.sqlite`.
 Súbory v `data/` sa nezahŕňajú do Next.js output tracingu, preto treba databázu

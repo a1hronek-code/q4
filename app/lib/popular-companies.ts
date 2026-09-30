@@ -23,4 +23,11 @@ export const popularCompanies = [
     id: "464669",
     category: "Bankovníctvo",
   },
+  {
+    slug: "easycredit-sk",
+    name: "EasyCredit SK",
+    ico: "56088515",
+    id: "17630748",
+    category: "Financie",
+  },
 ] as const;

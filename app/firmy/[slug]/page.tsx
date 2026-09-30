@@ -5,6 +5,7 @@ import { Breadcrumb } from "../../components/Breadcrumb";
 import { RelationshipGraph } from "../../components/RelationshipGraph";
 import { getRpoCompanyGraph, hasRpoDatabase, RpoDatabaseError } from "../../lib/rpo";
 import { getRpoSubjectAvailable } from "../../lib/rpo-data";
+import { getCachedRelationshipGraph } from "../../lib/relationship-graph-cache";
 import { breadcrumbJsonLd, companyProfilePath, jsonLdScriptProps, openGraphFor } from "../../lib/seo";
 
 export const runtime = "nodejs";
@@ -67,6 +68,8 @@ export default async function CompanyProfilePage({
   let error = "";
   let graph;
   let graphError = "";
+  let graphNotice = "";
+  let graphGeneratedAt = "";
   try {
     subject = await getRpoSubjectAvailable(id);
   } catch (cause) {
@@ -86,6 +89,18 @@ export default async function CompanyProfilePage({
           ? cause.message
           : "Grafické väzby sa nepodarilo načítať.";
       console.error("RPO relationship graph lookup failed", cause);
+    }
+  } else if (subject) {
+    // Production has no local database, so fall back to a precomputed
+    // snapshot for popular companies; otherwise show an honest notice
+    // instead of silently hiding the whole section.
+    const cached = getCachedRelationshipGraph(id);
+    if (cached) {
+      graph = cached.graph;
+      graphGeneratedAt = cached.generatedAt;
+    } else {
+      graphNotice =
+        "Graf väzieb je zatiaľ pripravený len pre vybrané veľké firmy. Pre tento subjekt ho čoskoro doplníme.";
     }
   }
 
@@ -254,7 +269,20 @@ export default async function CompanyProfilePage({
                 <p>{graphError}</p>
               </section>
             ) : graph ? (
-              <RelationshipGraph company={subject} graph={graph} />
+              <>
+                <RelationshipGraph company={subject} graph={graph} />
+                {graphGeneratedAt ? (
+                  <p className="data-source-note">
+                    Graf väzieb je predpočítaný snímok k{" "}
+                    {new Date(graphGeneratedAt).toLocaleDateString("sk-SK")}.
+                  </p>
+                ) : null}
+              </>
+            ) : graphNotice ? (
+              <section className="profile-activity relationship-section">
+                <span className="eyebrow">Grafické väzby</span>
+                <p>{graphNotice}</p>
+              </section>
             ) : null}
 
             <p className="data-source-note">

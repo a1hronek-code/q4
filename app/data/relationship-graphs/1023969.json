@@ -1,0 +1,41 @@
+{
+  "id": 1023969,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "ing. beata onduskova",
+        "name": "Ing. Beáta Ondušková",
+        "roles": [
+          "Vedúci podniku (organizačnej zložky podniku)",
+          "Vedúci podniku zahraničnej osoby / organizačnej zložky podniku zahraničnej osoby"
+        ],
+        "active": true
+      },
+      {
+        "id": "mgr. milos badida",
+        "name": "Mgr. Miloš Badida",
+        "roles": [
+          "Vedúci podniku (organizačnej zložky podniku)",
+          "Vedúci podniku zahraničnej osoby / organizačnej zložky podniku zahraničnej osoby"
+        ],
+        "active": false
+      }
+    ],
+    "companies": [],
+    "relationships": [
+      {
+        "personId": "ing. beata onduskova",
+        "companyId": 1023969,
+        "role": "Vedúci podniku (organizačnej zložky podniku) · Vedúci podniku zahraničnej osoby / organizačnej zložky podniku zahraničnej osoby",
+        "active": true
+      },
+      {
+        "personId": "mgr. milos badida",
+        "companyId": 1023969,
+        "role": "Vedúci podniku (organizačnej zložky podniku) · Vedúci podniku zahraničnej osoby / organizačnej zložky podniku zahraničnej osoby",
+        "active": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "id": 1009309,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "bohumil suchanek",
+        "name": "Bohumil Suchánek",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "bruno duthoit",
+        "name": "Bruno Duthoit",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "eric maintenay",
+        "name": "Eric Maintenay",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "gilles deloison",
+        "name": "Gilles Deloison",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "christian luginbuhl",
+        "name": "Christian Luginbühl",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. igor berta",
+        "name": "Ing. Igor Berta",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. lubos brozman",
+        "name": "Ing. Ľuboš Brozman",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "katarina boledovicova",
+        "name": "Katarína Boledovičová",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "marc ricau",
+        "name": "Marc Ricau",
+        "roles": [
+          "Predstavenstvo",
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "mariusz gatza",
+        "name": "Mariusz Gatza",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "martin mosny",
+        "name": "Martin Mosný",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "milena harito shteto",
+        "name": "Milena Harito Shteto",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      }
+    ],
+    "companies": [
+      {
+        "id": 17389943,
+        "name": "Asociácia mobilných operátorov Slovenska",
+        "ico": "55850774",
+        "city": "Bratislava - mestská časť Ružinov"
+      },
+      {
+        "id": 3410577,
+        "name": "Bohumil Suchánek BOBO trans",
+        "ico": "32095830",
+        "city": "Bratislava - mestská časť Ružinov"
+      },
+      {
+        "id": 570482,
+        "name": "Caravan & Car spol. s r.o.",
+        "ico": "31351069",
+        "city": "Bratislava"
+      },
+      {
+        "id": 3959440,
+        "name": "Ing. Katarína Boledovičová",
+        "ico": "42338441",
+        "city": "Levice"
+      },
+      {
+        "id": 2551266,
+        "name": "Ing. Martin Mosný",
+        "ico": "30164117",
+        "city": "Bratislava - mestská časť Karlova Ves"
+      },
+      {
+        "id": 934864,
+        "name": "INTER RIVER s. r. o.",
+        "ico": "45506868",
+        "city": "Bratislava - mestská časť Ružinov"
+      },
+      {
+        "id": 8785456,
+        "name": "Katarína Boledovičová",
+        "ico": "50464221",
+        "city": "Veľké Kostoľany"
+      },
+      {
+        "id": 3684565,
+        "name": "Katarína Boledovičová",
+        "ico": "37078160",
+        "city": "Nitra"
+      },
+      {
+        "id": 15715947,
+        "name": "Martin Mosný",
+        "ico": "53811160",
+        "city": "Bratislava - mestská časť Vrakuňa"
+      },
+      {
+        "id": 427201,
+        "name": "Orange CorpSec, spol. s r.o.",
+        "ico": "35916877",
+        "city": "Bratislava"
+      },
+      {
+        "id": 9315765,
+        "name": "Orange Finančné služby, s.r.o.",
+        "ico": "51086662",
+        "city": "Bratislava - mestská časť Ružinov"
+      },
+      {
+        "id": 15626156,
+        "name": "TopSell Services s. r. o.",
+        "ico": "53668804",
+        "city": "Bratislava - mestská časť Staré Mesto"
+      }
+    ],
+    "relationships": [
+      {
+        "personId": "eric maintenay",
+        "companyId": 1009309,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "katarina boledovicova",
+        "companyId": 1009309,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "marc ricau",
+        "companyId": 1009309,
+        "role": "Predstavenstvo · Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "mariusz gatza",
+        "companyId": 1009309,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 1009309,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "christian luginbuhl",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. igor berta",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. lubos brozman",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "milena harito shteto",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "bohumil suchanek",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "bruno duthoit",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "gilles deloison",
+        "companyId": 1009309,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "bohumil suchanek",
+        "companyId": 3410577,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "eric maintenay",
+        "companyId": 427201,
+        "role": "Prokurista",
+        "active": true
+      },
+      {
+        "personId": "katarina boledovicova",
+        "companyId": 3959440,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "katarina boledovicova",
+        "companyId": 8785456,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "katarina boledovicova",
+        "companyId": 3684565,
+        "role": "Podnikateľ",
+        "active": false
+      },
+      {
+        "personId": "marc ricau",
+        "companyId": 9315765,
+        "role": "Konateľ",
+        "active": true
+      },
+      {
+        "personId": "mariusz gatza",
+        "companyId": 427201,
+        "role": "Prokurista",
+        "active": true
+      },
+      {
+        "personId": "mariusz gatza",
+        "companyId": 9315765,
+        "role": "Konateľ",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 2551266,
+        "role": "Podnikateľ",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 15715947,
+        "role": "Podnikateľ",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 15626156,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 427201,
+        "role": "Konateľ",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 17389943,
+        "role": "Iný štatutárny orgán",
+        "active": true
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 570482,
+        "role": "Konateľ · Spoločník v.o.s. / s.r.o.",
+        "active": false
+      },
+      {
+        "personId": "martin mosny",
+        "companyId": 934864,
+        "role": "Konateľ",
+        "active": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "id": 4445617,
+  "generatedAt": "2026-09-30T19:59:22.942Z",
+  "graph": {
+    "people": [
+      {
+        "id": "dr. andrii stepanenko",
+        "name": "Dr. Andrii Stepanenko",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "dr. hannes mosenbacher",
+        "name": "Dr. Hannes Mösenbacher",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. iveta uhrinova",
+        "name": "Ing. Iveta Uhrinová",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. martin kubik",
+        "name": "Ing. Martin Kubík",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. peter golha",
+        "name": "Ing. Peter Golha",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. peter matus",
+        "name": "Ing. Peter Matúš",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "ing. zuzana kostialova",
+        "name": "Ing. Zuzana Koštialová",
+        "roles": [
+          "Predstavenstvo",
+          "Prokurista"
+        ],
+        "active": true
+      },
+      {
+        "id": "judr. tomas borec",
+        "name": "JUDr. Tomáš Borec",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "mag. (fh) oliver pichler",
+        "name": "Mag. (FH) Oliver Pichler",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "mag. andreas gschwenter",
+        "name": "Mag. Andreas Gschwenter",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      },
+      {
+        "id": "mag. bernhard henhappel",
+        "name": "Mag. Bernhard Henhappel",
+        "roles": [
+          "Predstavenstvo"
+        ],
+        "active": true
+      },
+      {
+        "id": "mag. michael hollerer",
+        "name": "Mag. Michael Höllerer",
+        "roles": [
+          "Člen dozorného orgánu"
+        ],
+        "active": true
+      }
+    ],
+    "companies": [
+      {
+        "id": 16767529,
+        "name": "Ing. Martin Kubík",
+        "ico": "51099250",
+        "city": "Banská Bystrica"
+      },
+      {
+        "id": 1014008,
+        "name": "Podielnicke družstvo DUNAJ",
+        "ico": "00190667",
+        "city": "Bratislava - Rusovce"
+      }
+    ],
+    "relationships": [
+      {
+        "personId": "ing. martin kubik",
+        "companyId": 4445617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. peter matus",
+        "companyId": 4445617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "ing. zuzana kostialova",
+        "companyId": 4445617,
+        "role": "Predstavenstvo · Prokurista",
+        "active": true
+      },
+      {
+        "personId": "mag. (fh) oliver pichler",
+        "companyId": 4445617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "mag. bernhard henhappel",
+        "companyId": 4445617,
+        "role": "Predstavenstvo",
+        "active": true
+      },
+      {
+        "personId": "dr. andrii stepanenko",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "dr. hannes mosenbacher",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. iveta uhrinova",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. peter golha",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "judr. tomas borec",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "mag. andreas gschwenter",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "mag. michael hollerer",
+        "companyId": 4445617,
+        "role": "Člen dozorného orgánu",
+        "active": true
+      },
+      {
+        "personId": "ing. martin kubik",
+        "companyId": 16767529,
+        "role": "Zakladateľ",
+        "active": true
+      },
+      {
+        "personId": "ing. peter matus",
+        "companyId": 1014008,
+        "role": "Predstavenstvo",
+        "active": false
+      }
+    ]
+  }
+}
