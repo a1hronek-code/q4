@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { RpoCompanyGraph, RpoSubject } from "../lib/rpo";
+import { companyProfilePath } from "../lib/seo";
 
 type RelationshipGraphProps = {
   company: Pick<RpoSubject, "id" | "name" | "ico">;
@@ -88,7 +89,7 @@ export function RelationshipGraph({ company, graph }: RelationshipGraphProps) {
             );
           })}
 
-          <Link href={`/firmy/${company.id}`} className="relationship-node-link">
+          <Link href={companyProfilePath(company.id, company.name)} className="relationship-node-link">
             <g className="relationship-node company-node" transform={`translate(24 ${rootY - 38})`}>
               <rect width="252" height="76" rx="16" />
               <text x="16" y="31" className="relationship-node-title">{shorten(company.name, 27)}</text>
@@ -128,7 +129,7 @@ export function RelationshipGraph({ company, graph }: RelationshipGraphProps) {
             return (
               <Link
                 key={relatedCompany.id}
-                href={`/firmy/${relatedCompany.id}`}
+                href={companyProfilePath(relatedCompany.id, relatedCompany.name)}
                 className="relationship-node-link"
                 aria-label={`Otvoriť profil ${relatedCompany.name}`}
                 title={`${relatedCompany.name}${relatedCompany.ico ? ` · IČO ${relatedCompany.ico}` : ""}`}

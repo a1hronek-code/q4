@@ -3,6 +3,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { popularCompanies } from "../../lib/popular-companies";
 import { RpoDatabaseError } from "../../lib/rpo";
 import { getRpoSubjectAvailable, searchRpoAvailable } from "../../lib/rpo-data";
+import { companyProfilePath } from "../../lib/seo";
 
 export const runtime = "nodejs";
 
@@ -22,7 +23,7 @@ export default async function PopularCompanyProfilePage({
 
     const profile = await getRpoSubjectAvailable(subject.id);
     if (!profile) notFound();
-    permanentRedirect(`/firmy/${profile.id}`);
+    permanentRedirect(companyProfilePath(profile.id, profile.name));
   } catch (cause) {
     if (cause instanceof RpoDatabaseError) {
       console.error("Popular company profile lookup failed", cause);

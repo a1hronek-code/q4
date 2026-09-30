@@ -1,13 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Breadcrumb } from "../../components/Breadcrumb";
 import { RelationshipGraph } from "../../components/RelationshipGraph";
 import { getRpoCompanyGraph, hasRpoDatabase, RpoDatabaseError } from "../../lib/rpo";
 import { getRpoSubjectAvailable } from "../../lib/rpo-data";
-import { breadcrumbJsonLd, jsonLdScriptProps, openGraphFor } from "../../lib/seo";
+import { breadcrumbJsonLd, companyProfilePath, jsonLdScriptProps, openGraphFor } from "../../lib/seo";
 
 export const runtime = "nodejs";
+
+function parseCompanyId(param: string): number | null {
+  const match = param.match(/^(\d+)(?:-.*)?$/);
+  if (!match) return null;
+  const id = Number(match[1]);
+  return Number.isSafeInteger(id) && id > 0 ? id : null;
+}
 
 export async function generateMetadata({
   params,
@@ -15,9 +22,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  if (!/^\d+$/.test(slug)) return {};
-  const id = Number(slug);
-  if (!Number.isSafeInteger(id) || id <= 0) return {};
+  const id = parseCompanyId(slug);
+  if (id === null) return {};
 
   try {
     const subject = await getRpoSubjectAvailable(id);
@@ -39,7 +45,7 @@ export async function generateMetadata({
       ...openGraphFor({
         title,
         description: resolvedDescription,
-        path: `/firmy/${slug}`,
+        path: companyProfilePath(id, subject.name),
       }),
     };
   } catch (cause) {
@@ -54,10 +60,8 @@ export default async function CompanyProfilePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  if (!/^\d+$/.test(slug)) notFound();
-
-  const id = Number(slug);
-  if (!Number.isSafeInteger(id) || id <= 0) notFound();
+  const id = parseCompanyId(slug);
+  if (id === null) notFound();
 
   let subject;
   let error = "";
@@ -87,6 +91,15 @@ export default async function CompanyProfilePage({
 
   if (!subject && !error) notFound();
 
+  // Canonicalize to /firmy/{id}-{slug}; redirect any other slug variant
+  // (including the bare numeric ID) permanently to avoid duplicate content.
+  if (subject) {
+    const canonicalPath = companyProfilePath(id, subject.name);
+    if (canonicalPath !== `/firmy/${slug}`) {
+      permanentRedirect(canonicalPath);
+    }
+  }
+
   const breadcrumbItems = [
     { label: "Domov", href: "/" },
     { label: "Firmy", href: "/firmy" },
@@ -102,7 +115,7 @@ export default async function CompanyProfilePage({
         ...(subject.legalForm ? { legalName: subject.name, additionalType: subject.legalForm } : {}),
         ...(subject.address ? { address: subject.address } : {}),
         ...(subject.establishment ? { foundingDate: subject.establishment } : {}),
-        url: `https://www.q4.sk/firmy/${id}`,
+        url: `https://www.q4.sk${companyProfilePath(id, subject.name)}`,
       }
     : null;
 

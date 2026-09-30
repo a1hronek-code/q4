@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { type FormEvent, useEffect, useState } from "react";
+import { companyProfilePath } from "../lib/seo";
 
 type SearchResult = {
   id: number;
@@ -143,7 +144,7 @@ export function SearchPanel() {
           </div>
         ) : results.length > 0 ? (
           results.map((item) => (
-            <Link key={item.id} href={`/firmy/${item.id}`} className="search-result-item">
+            <Link key={item.id} href={companyProfilePath(item.id, item.name)} className="search-result-item">
               <div className="search-result-top">
                 <span className="company-badge">{item.legalForm || "Subjekt RPO"}</span>
                 <span className="company-city">{item.city || "Sídlo neuvedené"}</span>

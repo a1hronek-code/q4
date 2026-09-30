@@ -3,11 +3,30 @@ import { calculators } from "./lib/calculators";
 import { elections } from "./lib/elections";
 import { holidays } from "./lib/holidays";
 import { popularCompanies } from "./lib/popular-companies";
+import { getRpoSubjectAvailable } from "./lib/rpo-data";
 import { schoolHolidays } from "./lib/school-holidays";
+import { companyProfilePath } from "./lib/seo";
 
 const siteUrl = "https://www.q4.sk";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const popularCompanyUrls = await Promise.all(
+    popularCompanies.map(async (company) => {
+      let profilePath = companyProfilePath(company.id, company.name);
+      try {
+        const subject = await getRpoSubjectAvailable(Number(company.id));
+        if (subject) profilePath = companyProfilePath(subject.id, subject.name);
+      } catch (cause) {
+        console.error("Sitemap company lookup failed", cause);
+      }
+      return {
+        url: `${siteUrl}${profilePath}`,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      };
+    }),
+  );
+
   return [
     {
       url: siteUrl,
@@ -19,11 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    ...popularCompanies.map((company) => ({
-      url: `${siteUrl}/firmy/${company.id}`,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    })),
+    ...popularCompanyUrls,
     {
       url: `${siteUrl}/kalkulacky`,
       changeFrequency: "monthly",

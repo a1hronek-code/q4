@@ -49,7 +49,24 @@ export function breadcrumbJsonLd(items: { label: string; href?: string }[]) {
   };
 }
 
-/** Renders a JSON-LD <script> tag's props; spread onto a <script> element. */
+/** Slugifies text into a lowercase, hyphenated, ASCII-only slug. */
+export function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
+/** Builds the canonical /firmy/{id}-{slug} path for a company profile. */
+export function companyProfilePath(id: number | string, name: string): string {
+  const slug = slugify(name);
+  return slug ? `/firmy/${id}-${slug}` : `/firmy/${id}`;
+}
+
+
 export function jsonLdScriptProps(data: unknown) {
   return {
     type: "application/ld+json",
