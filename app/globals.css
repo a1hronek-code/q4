@@ -903,6 +903,69 @@ a.api-card:hover {
   font-weight: 700;
 }
 
+.live-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.live-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
+}
+
+.live-stat-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.live-stat-card h3 {
+  margin: 4px 0 0;
+  font-size: 0.98rem;
+  color: var(--foreground);
+}
+
+.live-stat-value {
+  margin: 2px 0 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+}
+
+.live-stat-unit {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.live-stat-note {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.live-stat-source {
+  margin-top: auto;
+  padding-top: 8px;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.live-stat-source:hover {
+  text-decoration: underline;
+}
+
 .municipality-finder {
   margin-top: 28px;
   padding: 22px;

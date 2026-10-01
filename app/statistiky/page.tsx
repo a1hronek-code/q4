@@ -34,6 +34,12 @@ const q4Data = [
     href: "/pocasie",
     label: "Aktualizované priebežne",
   },
+  {
+    title: "Slovensko naživo",
+    description: "Živé počítadlá štátneho dlhu, obyvateľstva, narodených a ďalších čísel.",
+    href: "/slovensko-teraz",
+    label: "Prepočet na sekundu",
+  },
 ];
 
 const officialSources = [

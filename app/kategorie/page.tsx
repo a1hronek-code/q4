@@ -41,10 +41,16 @@ const categories = [
     icon: "✓",
   },
   {
-    title: "Slovensko v číslach",
+    title: "Štatistiky",
     description: "Menové kurzy, ceny a odkazy na oficiálne štatistické zdroje.",
     href: "/statistiky",
     icon: "#",
+  },
+  {
+    title: "Slovensko naživo",
+    description: "Živé počítadlá štátneho dlhu, obyvateľstva, narodených a ďalších čísel.",
+    href: "/slovensko-teraz",
+    icon: "❤",
   },
   {
     title: "Úrady a verejné služby",

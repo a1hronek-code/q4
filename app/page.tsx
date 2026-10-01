@@ -41,6 +41,13 @@ const q4Features = [
     href: "/statistiky",
   },
   {
+    number: "08",
+    title: "Slovensko naživo",
+    description: "Živé počítadlá štátneho dlhu, obyvateľstva a ďalších čísel",
+    icon: "❤",
+    href: "/slovensko-teraz",
+  },
+  {
     number: "05",
     title: "Úrady a služby",
     description: "Overené odkazy na slovenské úrady a elektronické služby",

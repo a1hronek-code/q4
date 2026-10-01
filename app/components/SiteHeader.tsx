@@ -16,6 +16,7 @@ export function SiteHeader() {
         <Link href="/pocasie">Počasie</Link>
         <Link href="/sviatky">Kalendár</Link>
         <Link href="/statistiky">Štatistiky</Link>
+        <Link href="/slovensko-teraz">Naživo</Link>
         <Link href="/obce">Obce</Link>
         <Link href="/urady">Úrady</Link>
         <div className="nav-dropdown">
