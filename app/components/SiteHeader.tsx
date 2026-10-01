@@ -6,9 +6,8 @@ export function SiteHeader() {
     <header className="topbar">
       <Link href="/" className="brand-wrap" aria-label="Q4.sk – domov">
         <span className="brand-mark">Q4</span>
-        <span>
-          <span className="brand-name">Q4.sk</span>
-          <span className="brand-subtitle">Praktické informácie pre Slovensko</span>
+        <span className="brand-name">
+          Q4<span className="brand-name-accent">.sk</span>
         </span>
       </Link>
 
@@ -41,7 +40,7 @@ export function SiteHeader() {
       </nav>
 
       <div className="actions">
-        <Link className="primary-btn" href="/#vyhladavanie">Vyhľadať firmu</Link>
+        <Link className="primary-btn nav-cta" href="/#vyhladavanie">Vyhľadať firmu →</Link>
       </div>
     </header>
   );

@@ -75,9 +75,9 @@ export default function Home() {
     <main className="page-shell intelligence-page">
       <SiteHeader />
 
-      <section className="hero intelligence-hero hero-compact">
-        <div className="hero-copy">
-          <span className="eyebrow">Praktický portál pre Slovensko</span>
+      <section className="home-hero">
+        <div className="home-hero-copy">
+          <span className="eyebrow">Slovensko v číslach</span>
           <h1>Všetko dôležité o Slovensku. Na jednom mieste.</h1>
           <p>
             Nájdite užitočné informácie pre každý deň – od počasia, sviatkov a kalkulačiek

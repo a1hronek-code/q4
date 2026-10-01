@@ -72,14 +72,16 @@ export function TodayWidget() {
   const tomorrowNames = tomorrow ? getNameDayNames(tomorrow) : [];
 
   return (
-    <div className="today-widget" aria-label="Počasie a meniny">
-      <div className="today-widget-column">
-        <span className="today-widget-label">Dnes</span>
-        <strong className="today-widget-date">{now ? todayLabelFormatter.format(now) : "\u00A0"}</strong>
+    <div className="home-stats-grid" aria-label="Počasie a meniny">
+      <div className="stat-card stat-card-today">
+        <div>
+          <span className="stat-label">Dnes</span>
+          <strong className="stat-date">{now ? todayLabelFormatter.format(now) : "\u00A0"}</strong>
+        </div>
         {loading ? (
           <p className="market-loading">Načítavam počasie…</p>
         ) : weather ? (
-          <div className="today-widget-weather">
+          <div className="stat-weather">
             <strong>{numberFormatter.format(weather.temperature)}°C</strong>
             <span>{weather.description}</span>
             <small>Pocitovo {numberFormatter.format(weather.feelsLike)}°C · Vietor {numberFormatter.format(weather.windSpeed)} km/h</small>
@@ -87,22 +89,22 @@ export function TodayWidget() {
         ) : (
           <p className="market-error" role="status">{weatherError}</p>
         )}
-        <p className="today-widget-nameday">
+        <p className="stat-nameday">
           Meniny: <strong>{todayNames.length > 0 ? todayNames.join(", ") : "štátny sviatok"}</strong>
         </p>
       </div>
 
-      <div className="today-widget-divider" aria-hidden="true" />
-
-      <div className="today-widget-column">
-        <span className="today-widget-label">Zajtra</span>
-        <strong className="today-widget-date">
-          {tomorrow ? todayLabelFormatter.format(tomorrow) : "\u00A0"}
-        </strong>
+      <div className="stat-card stat-card-tomorrow">
+        <div>
+          <span className="stat-label">Zajtra</span>
+          <strong className="stat-date">
+            {tomorrow ? todayLabelFormatter.format(tomorrow) : "\u00A0"}
+          </strong>
+        </div>
         {loading ? (
           <p className="market-loading">Načítavam predpoveď…</p>
         ) : weather?.tomorrow ? (
-          <div className="today-widget-weather">
+          <div className="stat-weather">
             <strong>
               {numberFormatter.format(weather.tomorrow.minTemperature)}° / {numberFormatter.format(weather.tomorrow.maxTemperature)}°C
             </strong>
@@ -111,12 +113,12 @@ export function TodayWidget() {
         ) : (
           <p className="market-error" role="status">Predpoveď na zajtra nie je dostupná.</p>
         )}
-        <p className="today-widget-nameday">
+        <p className="stat-nameday">
           Meniny: <strong>{tomorrowNames.length > 0 ? tomorrowNames.join(", ") : "štátny sviatok"}</strong>
         </p>
       </div>
 
-      <div className="today-widget-links">
+      <div className="home-stats-links">
         <Link href="/pocasie">Podrobné počasie →</Link>
         <Link href="/meniny">Meninový kalendár →</Link>
         <a href="https://predpovedpocasia.sk/" target="_blank" rel="noreferrer">
