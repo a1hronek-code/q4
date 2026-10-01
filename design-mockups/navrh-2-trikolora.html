@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8" />
+<title>Návrh 2 – Trikolóra Grid</title>
+<style>
+  :root{
+    --blue:#1246a3;
+    --red:#d1263a;
+    --ink:#171b24;
+    --muted:#6b7280;
+    --bg:#fbfbfb;
+    --cream:#fff8f0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);}
+  .shell{max-width:1200px;margin:0 auto;padding:20px 24px 60px;}
+
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;border-radius:16px;background:#fff;
+    border:1px solid #eee;
+  }
+  .logo{display:flex;align-items:center;gap:0;}
+  .logo-badge{
+    font-weight:900;font-size:1.3rem;letter-spacing:-0.04em;
+    padding:6px 10px;border-radius:8px;
+    background:linear-gradient(135deg,var(--blue),#2a63c9);
+    color:#fff;
+  }
+  .logo-dot{color:var(--red);font-weight:900;font-size:1.3rem;margin-left:2px;}
+  nav{display:flex;gap:22px;}
+  nav a{color:var(--ink);text-decoration:none;font-size:0.88rem;font-weight:700;opacity:0.72;}
+  nav a:hover{opacity:1;}
+  .cta{background:var(--ink);color:#fff;border:none;padding:10px 18px;border-radius:999px;font-weight:700;font-size:0.85rem;cursor:pointer;}
+
+  /* Hero: no big blue box — a tri-color card grid instead */
+  .hero{margin-top:26px;}
+  .hero-top{text-align:left;max-width:720px;}
+  .hero-top .kicker{
+    display:inline-block;color:var(--red);font-weight:800;font-size:0.8rem;
+    text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;
+  }
+  .hero-top h1{
+    font-size:3rem;line-height:1.05;letter-spacing:-0.03em;margin:0 0 14px;font-weight:800;
+  }
+  .hero-top p{color:var(--muted);font-size:1.05rem;max-width:560px;line-height:1.6;margin:0 0 26px;}
+
+  .search{
+    display:flex;gap:10px;max-width:620px;
+  }
+  .search input{
+    flex:1;padding:14px 16px;border-radius:12px;border:2px solid var(--ink);font-size:1rem;outline:none;
+  }
+  .search button{
+    padding:14px 24px;border-radius:12px;border:none;background:var(--red);color:#fff;font-weight:800;cursor:pointer;
+  }
+
+  .tri-grid{
+    margin-top:36px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .tri-card{
+    border-radius:18px;padding:20px;color:#fff;min-height:150px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .tri-card.blue{background:linear-gradient(145deg,#123b82,#2a63c9);}
+  .tri-card.red{background:linear-gradient(145deg,#8e1626,#d1263a);}
+  .tri-card.ink{background:linear-gradient(145deg,#1b2230,#333d50);}
+  .tri-card.cream{background:var(--cream);color:var(--ink);border:1px solid #f1e3d0;}
+  .tri-card span{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;opacity:0.8;}
+  .tri-card strong{font-size:1.5rem;}
+  .tri-card small{opacity:0.8;font-size:0.78rem;}
+
+  .section-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+  .mini-card{
+    background:#fff;border:1px solid #eee;border-radius:16px;padding:18px;
+  }
+  .mini-card .icon{
+    width:36px;height:36px;border-radius:10px;background:#f1f3f8;display:grid;place-items:center;margin-bottom:12px;font-weight:800;color:var(--blue);
+  }
+  .mini-card h3{margin:0 0 6px;font-size:1rem;}
+  .mini-card p{margin:0;color:var(--muted);font-size:0.86rem;line-height:1.5;}
+
+  .note{text-align:center;margin-top:50px;color:var(--muted);font-size:0.85rem;}
+  .note b{color:var(--ink);}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="logo">
+      <span class="logo-badge">Q4</span><span class="logo-dot">.sk</span>
+    </div>
+    <nav>
+      <a href="#">Počasie</a>
+      <a href="#">Sviatky</a>
+      <a href="#">Štatistiky</a>
+      <a href="#">Naživo</a>
+      <a href="#">Obce</a>
+      <a href="#">Kalkulačky</a>
+    </nav>
+    <button class="cta">Vyhľadať firmu →</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-top">
+      <span class="kicker">Slovensko v číslach</span>
+      <h1>Informácie, na ktorých<br/>skutočne záleží.</h1>
+      <p>Jedno miesto pre počasie, sviatky, kurzy, firmy aj živé štatistiky o Slovensku.</p>
+      <div class="search">
+        <input placeholder="Hľadať firmu, obec alebo IČO…" />
+        <button>Hľadať</button>
+      </div>
+    </div>
+
+    <div class="tri-grid">
+      <div class="tri-card blue">
+        <span>Počasie teraz</span>
+        <div><strong>14°C</strong><br/><small>Bratislava, polooblačno</small></div>
+      </div>
+      <div class="tri-card red">
+        <span>Dnes má meniny</span>
+        <div><strong>Igor</strong><br/><small>zajtra: Edita</small></div>
+      </div>
+      <div class="tri-card ink">
+        <span>Štátny dlh SR naživo</span>
+        <div><strong>92,0 mld €</strong><br/><small>rastie ~187 €/s</small></div>
+      </div>
+      <div class="tri-card cream">
+        <span>Najbližší sviatok</span>
+        <div><strong>1. november</strong><br/><small>Sviatok všetkých svätých</small></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-row">
+    <div class="mini-card"><div class="icon">★</div><h3>Overené firmy</h3><p>Dáta priamo z registra právnických osôb, bez domýšľania.</p></div>
+    <div class="mini-card"><div class="icon">⏱</div><h3>Slovensko naživo</h3><p>Dlh, obyvatelia a ďalšie čísla počítané na sekundu.</p></div>
+    <div class="mini-card"><div class="icon">🧮</div><h3>Kalkulačky</h3><p>Čistá mzda, hypotéka, rodičovský príspevok a ďalšie.</p></div>
+  </div>
+
+  <p class="note">Návrh č. 2 — <b>„Trikolóra Grid“</b>: dynamická mriežka farebných kariet namiesto jedného veľkého boxu, výraznejšie slovenské farby.</p>
+</div>
+</body>
+</html>
