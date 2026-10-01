@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { calculators } from "./lib/calculators";
 import { elections } from "./lib/elections";
 import { holidays } from "./lib/holidays";
+import { listMunicipalities } from "./lib/municipalities";
 import { popularCompanies } from "./lib/popular-companies";
 import { getRpoSubjectAvailable } from "./lib/rpo-data";
 import { schoolHolidays } from "./lib/school-holidays";
@@ -53,6 +54,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${siteUrl}/obce`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    ...listMunicipalities().map((municipality) => ({
+      url: `${siteUrl}/obce/${municipality.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.4,
+    })),
     ...popularCompanyUrls,
     {
       url: `${siteUrl}/kalkulacky`,

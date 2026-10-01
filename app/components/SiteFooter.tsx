@@ -17,6 +17,7 @@ export function SiteFooter() {
         <Link href="/#trhy">Kurzy a ceny</Link>
         <Link href="/statistiky">Štatistiky</Link>
         <Link href="/urady">Úrady a služby</Link>
+        <Link href="/obce">Obce a mestá</Link>
         <Link href="/firmy">Vyhľadávanie firiem</Link>
         <Link href="/kalkulacky">Kalkulačky</Link>
         <Link href="/admin/clanky">Administrácia článkov</Link>

@@ -54,6 +54,13 @@ const q4Features = [
     icon: "⌕",
     href: "/firmy",
   },
+  {
+    number: "07",
+    title: "Obce a mestá",
+    description: "Počty firiem a inštitúcií v konkrétnej obci podľa registra RPO",
+    icon: "⌂",
+    href: "/obce",
+  },
 ];
 
 export default function Home() {

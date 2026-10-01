@@ -903,6 +903,76 @@ a.api-card:hover {
   font-weight: 700;
 }
 
+.municipality-finder {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: white;
+}
+
+.municipality-finder-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #344054;
+  margin-bottom: 8px;
+}
+
+.municipality-finder-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 0.98rem;
+  background: var(--surface, #f8fafc);
+}
+
+.municipality-finder-hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.municipality-finder-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.municipality-finder-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--foreground);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.municipality-finder-list a:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.municipality-finder-list a small {
+  color: var(--muted);
+  font-size: 0.74rem;
+  white-space: nowrap;
+}
+
+.municipality-finder-empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .nameday-calendar {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

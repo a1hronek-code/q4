@@ -75,6 +75,16 @@ keď sa zmení `data/rpo.sqlite` alebo zoznam populárnych firiem. Pre ostatné
 subjekty sa namiesto grafu zobrazí informácia, že graf väzieb zatiaľ nie je
 k dispozícii.
 
+Rovnakým princípom funguje aj adresár obcí na `/obce`: skript
+`node scripts/build-municipalities.mjs` predpočíta z lokálnej databázy reálne
+počty registrovaných a aktívnych subjektov pre každú obec (s aspoň 25
+subjektmi) a zoznam niekoľkých najnovších aktívnych firiem, výstup uloží do
+`app/data/municipalities.json` a ten sa commitne do Gitu. Skript si pri prvom
+spustení vytvorí lokálny index nad `data/rpo.sqlite`, aby agregácia nad 2,2 mil.
+riadkov netrvala neprimerane dlho; index zostáva len v lokálnom súbore databázy,
+ktorý sa aj tak necommituje. Spustite skript znova (a commitnite výstup)
+vždy, keď sa zmení `data/rpo.sqlite`.
+
 Prístup k lokálnemu exportu vyžaduje Node.js runtime a súbor `data/rpo.sqlite`.
 Súbory v `data/` sa nezahŕňajú do Next.js output tracingu, preto treba databázu
 sprístupniť aplikácii nezávisle od build procesu. Príkaz `npm run build` používa

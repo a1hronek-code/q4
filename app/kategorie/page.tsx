@@ -59,6 +59,12 @@ const categories = [
     icon: "⌕",
   },
   {
+    title: "Obce a mestá",
+    description: "Počty registrovaných firiem a inštitúcií podľa obce, z Registra právnických osôb.",
+    href: "/obce",
+    icon: "⌂",
+  },
+  {
     title: "Kurzy a ceny",
     description: "Referenčné kurzy mien, ceny palív a čerpacie stanice.",
     href: "/#trhy",
