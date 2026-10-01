@@ -160,7 +160,7 @@ export function MarketOverview() {
           <span className="eyebrow">Prehľad trhu</span>
           <h2 id="market-title">Kurzy mien a ceny palív</h2>
           <p className="directory-intro">
-            Kurzy ECB s históriou a predikciou, priemerné ceny palív a najbližšie čerpacie stanice.
+            Referenčné kurzy NBS/ECB s históriou, priemerné ceny palív a najbližšie čerpacie stanice.
           </p>
         </div>
         <div className="market-refresh">
@@ -253,11 +253,11 @@ export function MarketOverview() {
               <p className="market-source">
                 Referenčný kurz k {formatDate(market.exchangeRates.data.date)} ·{" "}
                 <a
-                  href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+                  href="https://nbs.sk/export/en/exchange-rate/latest/xml"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  ECB
+                  NBS / ECB
                 </a>
               </p>
             </>

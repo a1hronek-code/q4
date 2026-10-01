@@ -58,23 +58,27 @@ function weatherDescription(code: number): string {
 }
 
 async function loadExchangeRates(): Promise<ExchangeRates> {
-  const response = await fetch(
-    "https://api.frankfurter.dev/v1/latest?base=EUR&symbols=USD,CZK,GBP,CHF,PLN,HUF",
-    { next: { revalidate: 21_600 } },
-  );
-  if (!response.ok) throw new Error(`Frankfurter returned HTTP ${response.status}`);
+  const response = await fetch("https://nbs.sk/export/en/exchange-rate/latest/xml", {
+    headers: { Accept: "application/xml" },
+    next: { revalidate: 21_600 },
+    signal: AbortSignal.timeout(15_000),
+  });
+  if (!response.ok) throw new Error(`NBS exchange-rate feed returned HTTP ${response.status}`);
 
-  const body = asRecord(await response.json());
-  const sourceRates = asRecord(body?.rates);
+  const xml = await response.text();
+  const date = xml.match(/<Cube\s+time="(\d{4}-\d{2}-\d{2})"/)?.[1] ?? "";
+  if (!date) throw new Error("NBS exchange-rate feed returned no reference date");
+
+  const requiredCurrencies = ["USD", "CZK", "GBP", "CHF", "PLN", "HUF"];
   const rates: Record<string, number> = {};
-  for (const currency of ["USD", "CZK", "GBP", "CHF", "PLN", "HUF"]) {
-    const rate = asNumber(sourceRates?.[currency]);
-    if (rate !== null && rate > 0) rates[currency] = rate;
+  for (const match of xml.matchAll(/<Cube\s+currency="([A-Z]{3})"\s+rate="([\d,.]+)"\s*\/>/g)) {
+    if (!requiredCurrencies.includes(match[1])) continue;
+    const rate = Number(match[2].replaceAll(",", ""));
+    if (Number.isFinite(rate) && rate > 0) rates[match[1]] = rate;
   }
 
-  const date = typeof body?.date === "string" ? body.date : "";
-  if (!date || Object.keys(rates).length === 0) {
-    throw new Error("Frankfurter returned an incomplete exchange-rate response");
+  if (requiredCurrencies.some((currency) => !rates[currency])) {
+    throw new Error("NBS exchange-rate feed returned incomplete reference rates");
   }
   return { date, rates };
 }
@@ -177,7 +181,7 @@ async function resultFor<T>(
 
 export async function GET() {
   const [exchangeRates, weather, fuelPrices] = await Promise.all([
-    resultFor("Exchange rates", loadExchangeRates),
+    resultFor("NBS exchange rates", loadExchangeRates),
     resultFor("Bratislava weather", loadWeather),
     resultFor("Slovak fuel prices", loadFuelPrices),
   ]);

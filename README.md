@@ -80,6 +80,24 @@ Súbory v `data/` sa nezahŕňajú do Next.js output tracingu, preto treba datab
 sprístupniť aplikácii nezávisle od build procesu. Príkaz `npm run build` používa
 Webpack, aby zostavenie nebolo závislé od veľkosti lokálneho databázového súboru.
 
+### Verejné údaje a ich zdroje
+
+- Menové referenčné kurzy: NBS XML feed s údajmi ECB; historické hodnoty
+  načítava oficiálne dátové rozhranie ECB. Ide o referenčné, nie komerčné
+  výmenné kurzy.
+- Počasie: Open-Meteo. Oficiálne dáta SHMÚ sú dostupné ako otvorené súbory
+  s licenciou CC BY 4.0, nie ako stabilné verejné REST API pre predpoveď.
+- Priemerné ceny palív: týždenný prehľad [fuel-prices.eu](https://www.fuel-prices.eu/Slovakia/);
+  metodickým referenčným zdrojom EÚ je [Weekly Oil Bulletin](https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en).
+  Priemer nie je totožný s cenou na konkrétnej čerpacej stanici.
+
+Štatistický úrad SR mení rozhranie DATAcube a po 15. septembri 2026 smeruje
+na náhradnú službu STATdata. Pred automatickým publikovaním ďalších národných
+štatistík treba potvrdiť stabilitu nového endpointu, metadáta aj licenciu
+konkrétneho datasetu. Pri školských registroch, zdravotníckych zariadeniach,
+voľbách a miestnych službách sa zatiaľ používajú oficiálne registre a stránky;
+nepredpokladáme existenciu jednotného verejného API, kým nie je zdokumentované.
+
 ## Správa článkov
 
 Administrácia je dostupná na `/admin/clanky`. Prihlásiť sa môžu iba OAuth účty

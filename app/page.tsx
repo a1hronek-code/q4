@@ -14,45 +14,45 @@ import { popularCompanies } from "./lib/popular-companies";
 const q4Features = [
   {
     number: "01",
-    title: "Firmy",
-    description: "Vyhľadávanie spoločností podľa názvu a IČO",
-    icon: "⌕",
-    href: "#vyhladavanie",
+    title: "Peníze a práca",
+    description: "Kalkulačky mzdy, dávok, hypotéky a osobných financií",
+    icon: "€",
+    href: "/kalkulacky",
   },
   {
     number: "02",
-    title: "Osoby",
-    description: "Vyhľadávanie konateľov a spoločníkov",
-    icon: "◎",
-    href: "#vyhladavanie",
+    title: "Počasie",
+    description: "Aktuálne počasie a predpoveď pre Bratislavu",
+    icon: "☀",
+    href: "/pocasie",
   },
   {
     number: "03",
-    title: "Vzťahy",
-    description: "Prepojenia medzi firmami a osobami",
-    icon: "⌘",
-    href: "#vztahy",
+    title: "Kalendár",
+    description: "Štátne sviatky, meniny a školské prázdniny",
+    icon: "▦",
+    href: "/sviatky",
   },
   {
     number: "04",
-    title: "História",
-    description: "Zmeny vo firmách a štatutároch",
-    icon: "↗",
-    href: "#vyhladavanie",
+    title: "Štatistiky",
+    description: "Menové kurzy, ceny a odkazy na oficiálne slovenské dáta",
+    icon: "#",
+    href: "/statistiky",
   },
   {
     number: "05",
-    title: "Zmluvy",
-    description: "Prepojenia na verejné zmluvy",
+    title: "Úrady a služby",
+    description: "Overené odkazy na slovenské úrady a elektronické služby",
     icon: "▤",
-    href: "#zdroje-dat",
+    href: "/urady",
   },
   {
     number: "06",
-    title: "Obchodné siete",
-    description: "Grafické zobrazenie vlastníckych väzieb",
-    icon: "✳",
-    href: "#vztahy",
+    title: "Firmy a osoby",
+    description: "Overovanie spoločností, štatutárov a väzieb",
+    icon: "⌕",
+    href: "/firmy",
   },
 ];
 
@@ -63,19 +63,19 @@ export default function Home() {
 
       <section className="hero intelligence-hero hero-compact">
         <div className="hero-copy">
-          <span className="eyebrow">Firemná inteligencia</span>
-          <h1>Zistite, kto stojí za firmou.</h1>
+          <span className="eyebrow">Praktický portál pre Slovensko</span>
+          <h1>Všetko dôležité o Slovensku. Na jednom mieste.</h1>
           <p>
-            Vyhľadajte konateľov, spoločníkov, prepojené firmy, obchodné väzby a verejne
-            dostupné informácie o slovenských subjektoch.
+            Nájdite užitočné informácie pre každý deň – od počasia, sviatkov a kalkulačiek
+            až po overené údaje o slovenských firmách a osobách.
           </p>
           <Suspense fallback={<div className="search-panel-wrap" aria-hidden="true" />}>
             <SearchPanel />
           </Suspense>
           <div className="hero-trustline">
-            <span><i aria-hidden="true" />Vyhľadávanie firiem a osôb</span>
-            <span>Prepojenia zobrazené v interaktívnom grafe</span>
-            <span>Verejne dostupné zdroje</span>
+            <span><i aria-hidden="true" />Informácie prispôsobené Slovensku</span>
+            <span>Praktické nástroje a aktuálne údaje</span>
+            <span>Firemné údaje z verejných registrov</span>
           </div>
         </div>
         <TodayWidget />
@@ -88,14 +88,12 @@ export default function Home() {
 
       <MarketOverview />
 
-      <RelationshipPreview />
-
       <section className="capabilities-section" id="schopnosti">
         <div className="section-heading">
-          <span className="eyebrow">Jedna platforma, jasné súvislosti</span>
-          <h2>Čo dokáže Q4</h2>
+          <span className="eyebrow">Každodenné informácie pre Slovensko</span>
+          <h2>Čo práve hľadáte?</h2>
           <p className="directory-intro">
-            Od rýchleho vyhľadania subjektu po mapu jeho obchodných väzieb.
+            Prejdite priamo na prehľad, kalkulačku alebo kalendár, ktorý potrebujete.
           </p>
         </div>
         <div className="capabilities-grid">
@@ -115,10 +113,10 @@ export default function Home() {
 
       <section className="popular-section" id="oblubene-firmy">
         <div className="section-heading">
-          <span className="eyebrow">Rýchly prístup</span>
-          <h2>Najčastejšie vyhľadávané</h2>
+          <span className="eyebrow">Firemná inteligencia Q4</span>
+          <h2>Známe slovenské spoločnosti</h2>
           <p className="directory-intro">
-            Profily známych slovenských spoločností z registra firiem.
+            Otvorte profil spoločnosti alebo vyhľadajte inú firmu podľa názvu či IČO.
           </p>
         </div>
         <div className="popular-grid">
@@ -166,13 +164,15 @@ export default function Home() {
         </div>
       </section>
 
+      <RelationshipPreview />
+
       <section className="data-note-section" id="zdroje-dat">
         <div>
           <span className="eyebrow">Transparentné zdroje</span>
-          <h2>Firemné údaje, ktoré si môžete overiť.</h2>
+          <h2>Údaje o firmách, ktoré si môžete overiť.</h2>
           <p>
             Firemné profily vychádzajú z verejných údajov Registra právnických osôb.
-            Dátum aktualizácie a zdroj sú uvedené pri údajoch.
+            Pri údajoch uvádzame dostupný zdroj a dátum aktualizácie.
           </p>
         </div>
         <a href="https://rpo.minv.sk/rpo-api-doc.html" target="_blank" rel="noreferrer">

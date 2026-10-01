@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const homeTitle = "Q4.sk | Firemná inteligencia pre Slovensko";
+const homeTitle = "Q4.sk | Praktické informácie pre život na Slovensku";
 const homeDescription =
-  "Zistite, kto stojí za firmou. Vyhľadajte slovenské spoločnosti, konateľov, spoločníkov a prepojenia medzi firmami.";
+  "Aktuálne informácie o Slovensku: počasie, sviatky, prázdniny, kurzy, ceny palív, kalkulačky a overené údaje o firmách.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

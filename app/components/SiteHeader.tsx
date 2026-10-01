@@ -8,15 +8,15 @@ export function SiteHeader() {
         <span className="brand-mark">Q4</span>
         <span>
           <span className="brand-name">Q4.sk</span>
-          <span className="brand-subtitle">Firemná inteligencia</span>
+          <span className="brand-subtitle">Praktické informácie pre Slovensko</span>
         </span>
       </Link>
 
       <nav className="nav" aria-label="Hlavná navigácia">
-        <Link href="/#vyhladavanie">Vyhľadávanie</Link>
-        <Link href="/#vztahy">Vzťahy</Link>
-        <Link href="/#schopnosti">Čo dokáže Q4</Link>
-        <Link href="/#trhy">Trhy</Link>
+        <Link href="/pocasie">Počasie</Link>
+        <Link href="/sviatky">Kalendár</Link>
+        <Link href="/statistiky">Štatistiky</Link>
+        <Link href="/urady">Úrady</Link>
         <div className="nav-dropdown">
           <Link href="/kalkulacky">Kalkulačky</Link>
           <div className="nav-dropdown-panel" role="menu" aria-label="Kalkulačky">
@@ -39,7 +39,7 @@ export function SiteHeader() {
       </nav>
 
       <div className="actions">
-        <Link className="primary-btn" href="/firmy">Preskúmať firmy</Link>
+        <Link className="primary-btn" href="/#vyhladavanie">Vyhľadať firmu</Link>
       </div>
     </header>
   );

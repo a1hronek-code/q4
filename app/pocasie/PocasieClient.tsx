@@ -122,7 +122,12 @@ export function PocasieClient() {
                 </div>
               </div>
 
-              <p className="tool-hint">Posledná aktualizácia: {formatDateTime(weather.time)}</p>
+              <p className="tool-hint">
+                Posledná aktualizácia: {formatDateTime(weather.time)} · Zdroj:{" "}
+                <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">
+                  Open-Meteo
+                </a>
+              </p>
             </>
           ) : (
             <p className="market-error" role="status">{error}</p>
