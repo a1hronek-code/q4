@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import { GoogleAnalyticsConsent } from "./components/GoogleAnalyticsConsent";
 import { jsonLdScriptProps, SITE_NAME, SITE_URL } from "./lib/seo";
 import "./globals.css";
 
-const geistSans = Geist({
+const bodySans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -64,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="sk"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bodySans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script {...jsonLdScriptProps(organizationJsonLd)} />
